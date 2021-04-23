@@ -7,8 +7,10 @@ function FetchStudents (){
     const [searchValue, setSearchValue] = useState('')
     const [searchCols, setSearchCols] = useState([])
     
+
+    // fetch data from BE
     useEffect(() => {
-        fetch('https://randomuser.me/api/?results=10')
+        fetch('URL')
             .then(res => res.json())
             .then(result => setStudents(result))
     }, [])
