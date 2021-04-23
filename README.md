@@ -1,1 +1,1 @@
-# Web-FE
+# npm install @fortawesome/fontawesome-free
