@@ -1,11 +1,9 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 
 const DataTable = ({students}) => {
     // heading- tên mỗi cột
     const columns = students[0] && Object.keys(students[0])
-    
    
-
     return (
         <table cellPadding = {0} cellSpacing = {0}> 
         <thread>
@@ -21,6 +19,7 @@ const DataTable = ({students}) => {
                     {columns.map((cols) =>(
                         <td>{row[cols]}</td>
             ))}
+            <input type = 'checkbox' name = 'attendStudent'></input>
                 </tr>
             ))}
         </tbody>
