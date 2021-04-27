@@ -15,20 +15,20 @@ function Home({setSignin}) {
             <h1>Face Recognition</h1>
             <p>18TCLC_DT3</p>
 {
-    !setSignin  &&
-            <div className = 'home-btns'>
-                <Button className = 'btns' 
-                buttonStyle = 'btn--outline' 
-                buttonSize= 'btn--large'
-                path= '/signin'
-                >Sign in</Button>
-
+    // !setSignin  &&
+    //         <div className = 'home-btns'>
+    //             <Button className = 'btns' 
+    //             buttonStyle = 'btn--outline' 
+    //             buttonSize= 'btn--large'
+    //             path= '/signin'
+    //             >Sign in</Button>
+/* {
                 <Button className = 'home-btns' 
                 buttonStyle = 'btn--primary' 
                 buttonSize= 'btn--large'
                 path='/video'
-                >Watch tutorial<i className= 'far fa-play-circle'/></Button>
-            </div>}
+                >Watch tutorial<i className= 'far fa-play-circle'/></Button> */}
+            {/* </div>} */}
 
         </div>
     )
