@@ -1,5 +1,5 @@
 import '../../App.css'
-import Home from '../Home'
+import Home from '../common/home/Home'
 
 function Homepage() {
     return (

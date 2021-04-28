@@ -1,5 +1,5 @@
 import React from 'react'
-import Home from '../Home'
+import Home from '../common/home/Home'
 
 const Signout = ({setSignin}) => {
     const setSignout = setSignin
