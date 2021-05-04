@@ -8,7 +8,7 @@ const FetchUser = ({bareurl }) => {
 
   const fetchStudent = async () => {
     try{
-    const response = await axios.get(`${bareurl}/user`);
+    const response = await axios.get(`${bareurl}/user`);//user
     setUsers(response.data);
     // check role, condition: temporary true 
     if(true){

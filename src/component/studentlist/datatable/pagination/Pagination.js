@@ -22,7 +22,6 @@ const Pagination = ({pagination, onPageChange}) => {
             onChange = {() => handlePageChange(page + 1)}>
                 Next
             </button>
-            
         </div>
     )
 }
