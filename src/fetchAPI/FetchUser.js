@@ -2,16 +2,17 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 
-const FetchUser = ({ method, bareurl }) => {
+const FetchUser = ({bareurl }) => {
   const [users, setUsers] = useState([]);
   const [isStudent, setIsStudent] = useState(false)
 
-  const fetchStudent = async ({ method }) => {
+  const fetchStudent = async () => {
     try{
-    const response = await axios.get(`${bareurl}${method}`);
+    const response = await axios.get(`${bareurl}/user`);
     setUsers(response.data);
-    if(response.data){
-        
+    // check role, condition: temporary true 
+    if(true){
+        setIsStudent(true)
     }
   }catch(error){
     console.log(error.messsage)
@@ -19,8 +20,8 @@ const FetchUser = ({ method, bareurl }) => {
   };
 
   useEffect(() => {
-      fetchStudent(method)
-  }, [method])
+      fetchStudent(bareurl)
+  }, [bareurl])
 
   return users
 

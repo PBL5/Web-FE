@@ -1,23 +1,23 @@
-import React, {useState, useEffect} from 'react'
-import axios from 'axios'
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-const FetchClass = ({method, bareurl }) => {
-    const [classes, setClasses] = useState([])
-    
-    const fetchClasses = async({method})=>{
-        try{
-            const response = await axios.get(`${bareurl}${method}`)
-            setClasses(response.data)
-        }catch(error){
-            console.log(error.message)
-        }
+const FetchClass = ({ bareurl }) => {
+  const [classes, setClasses] = useState([]);
+
+  const fetchClasses = async () => {
+    try {
+      const response = await axios.get(`${bareurl}/class`);
+      setClasses(response.data);
+    } catch (error) {
+      console.log(error.message);
     }
-    
-    useEffect(() => {
-       fetchClasses(method)
-    }, [method])
+  };
 
-    return classes
-}
+  useEffect(() => {
+    fetchClasses(bareurl);
+  }, [bareurl]);
 
-export default FetchClass
+  return classes;
+};
+
+export default FetchClass;

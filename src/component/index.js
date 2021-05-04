@@ -1,6 +1,0 @@
-export {default as Homepage} from './page/Homepage'
-export {default as Navbar } from './common/navbar/Navbar'
-export {default as Signin} from './page/account/signin/Signin'
-export {default as Signout} from './page/Signout'
-export {default as FetchStudents} from './studentlist/FetchStudents'
-export {default as DataTable} from './studentlist/datatable/DataTable'

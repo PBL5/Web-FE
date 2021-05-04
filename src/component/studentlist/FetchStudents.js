@@ -7,20 +7,13 @@ function FetchStudents() {
   const [searchValue, setSearchValue] = useState("");
   const [searchCols, setSearchCols] = useState([]);
 
-  const { students } = FetchUser("bareurl", "method");
+  const { students } = FetchUser('bareurl');
   // use for pagination
   const [pagination, setPagination] = useState({
     page: 1,
     limit: 20,
     totalRows: students.length,
   });
-
-  // show students only
-  const handleRoleOfUser = () => {
-    let flag = true;
-    if (flag) {
-    }
-  };
 
   function searchStudents(rows) {
     return rows.filter((row) =>
