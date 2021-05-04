@@ -1,31 +1,28 @@
 import React, { useState, useEffect } from "react";
 import DataTable from "./datatable/DataTable";
-import FetchStudent from "../../fetchAPI/FetchUser";
+import FetchUser from "../../fetchAPI/FetchUser";
 
 function FetchStudents() {
-  const [students, setStudents] = useState([]);
+  // const [students, setStudents] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [searchCols, setSearchCols] = useState([]);
 
+  const { students } = FetchUser("bareurl", "method");
   // use for pagination
   const [pagination, setPagination] = useState({
     page: 1,
     limit: 20,
     totalRows: students.length,
   });
-  // fetch data from BE, http://time.jsontest.com
-  useEffect(() => {
-    fetch("")
-      .then((res) => res.json())
-      .then((result) => setStudents(result));
-  }, []);
 
-  /* - return all the rows matching with the input value
-       - giá trị cái cột có khi là kiểu số nên phải cast về String, vì giá trị của searchField là text 
-       - cast toLowercase 2 vế so sánh, không thì tìm không ra
-    */
+  // show students only
+  const handleRoleOfUser = () => {
+    let flag = true;
+    if (flag) {
+    }
+  };
+
   function searchStudents(rows) {
-    // const cols = rows[0] && Object.keys(rows[0])
     return rows.filter((row) =>
       searchCols.some(
         (col) =>
@@ -34,14 +31,6 @@ function FetchStudents() {
       )
     );
   }
-
-  /*
-    - tìm kiếm sinh viên theo các label, check vào label muốn tìm
-    - check and uncheck
-    - searchCols là mảng chứa những label tìm kiếm, ví dụ tìm theo firstName, lastName, ..
-    - ...prevState chứa tất cả những giá trị đó, kiểm tra xem checkbox có đc check hay không để remove nó ra khỏi mảng
-    - 
-    */
 
   const handleSearchField = (col) => {
     const checked = searchCols.includes(col);
@@ -65,7 +54,7 @@ function FetchStudents() {
               <input
                 type="checkbox"
                 checked={searchCols.includes(col)}
-                onChange={() =>{
+                onChange={() => {
                   handleSearchField(col);
                 }}
               />
@@ -82,9 +71,24 @@ function FetchStudents() {
 
 export default FetchStudents;
 
-// const checked = searchCols.includes(col);
-// setSearchCols((prev) =>
-//   checked
-//     ? prev.filter((searchC) => searchC !== col)
-//     : [...prev, col]
-// );
+/* handleSearchField
+    - tìm kiếm sinh viên theo các label, check vào label muốn tìm
+    - check and uncheck
+    - searchCols là mảng chứa những label tìm kiếm, ví dụ tìm theo firstName, lastName, ..
+    - ...prevState chứa tất cả những giá trị đó, kiểm tra xem checkbox có đc check hay không để remove nó ra khỏi mảng
+    */
+
+/* searchStudent
+       - return all the rows matching with the input value
+       - giá trị cái cột có khi là kiểu số nên phải cast về String, vì giá trị của searchField là text 
+       - cast toLowercase 2 vế so sánh, không thì tìm không ra
+    */
+
+// fetch data from BE, http://time.jsontest.com
+/*
+  useEffect(() => {
+    fetch("")
+      .then((res) => res.json())
+      .then((result) => setStudents(result));
+  }, []);
+  */
