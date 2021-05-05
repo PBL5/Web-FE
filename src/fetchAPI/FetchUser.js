@@ -21,9 +21,9 @@ const FetchUser = ({bareurl }) => {
 
   useEffect(() => {
       fetchStudent(bareurl)
-  }, [bareurl])
+  }, [])
 
-  return users
+  return {users, isStudent}
 
   /*
    const FetchStudent =(bareurl, apiurl, method, students = []) =>{

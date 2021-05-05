@@ -8,13 +8,13 @@ function FetchStudents() {
   const [searchValue, setSearchValue] = useState("");
   const [searchCols, setSearchCols] = useState([]);
   const [classOption, setClassOption] = useState([]);
-  const [isSubmit, setIsSubmit] = useState(false)
+  const [isSubmit, setIsSubmit] = useState(false);
 
-  const { students } = FetchUser(
+  const { students, isStudent } = FetchUser(
     "https://my-json-server.typicode.com/typicode/demo/posts"
   );
   const { classes } = FetchClass("bareurl");
-  // use for pagination
+  
   const [pagination, setPagination] = useState({
     page: 1,
     limit: 20,
@@ -40,15 +40,15 @@ function FetchStudents() {
 
   const handleClassOption = (e) => {
     setClassOption(e.target.value);
-
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsSubmit(true)
+    setIsSubmit(true);
   };
 
   const columns = students[0] && Object.keys(students[0]);
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -61,7 +61,7 @@ function FetchStudents() {
               </select>
             ))}
         </label>
-        <input type = 'submit' value = 'Show'/>
+        <input type="submit" value="Show" />
       </form>
       <div>
         <input
@@ -83,12 +83,11 @@ function FetchStudents() {
             </label>
           ))}
       </div>
-{
-      isSubmit && 
-      <div>
-        <DataTable students={searchStudents(students)} />
-      </div> 
-      }
+      {isSubmit && isStudent && (
+        <div>
+          <DataTable students={searchStudents(students)} />
+        </div>
+      )}
     </div>
   );
 }

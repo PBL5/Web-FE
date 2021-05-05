@@ -15,7 +15,7 @@ const FetchClass = ({ bareurl }) => {
 
   useEffect(() => {
     fetchClasses(bareurl);
-  }, [bareurl]);
+  }, []);
 
   return classes;
 };
