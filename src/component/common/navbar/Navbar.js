@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "../button/Button";
 import "./Navbar.css";
 
-function Navbar({ signin, username }) {
+function Navbar({ signedIn }) {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
   // const [signin, setSignin] = useState(false)
@@ -27,7 +27,12 @@ function Navbar({ signin, username }) {
     setClick(false);
   };
   window.addEventListener("resize", showButton);
-  // console.log(click);
+
+  const handleSignout = () => {
+    setClick(false);
+    signedIn = false;
+  };
+
   return (
     <>
       <nav className="navbar">
@@ -45,19 +50,16 @@ function Navbar({ signin, username }) {
                 Home
               </Link>
             </li>
-            <li className="nav-items">
-              <Link to="/signin" className="navlinks" onClick={closeMenu}>
-                Sign in
-              </Link>
-            </li>
-            {signin && (
+            {signedIn ? (
               <li className="nav-items">
-                <Link
-                  to="./studentlist"
-                  className="navlinks"
-                  onClick={closeMenu}
-                >
-                  Student List
+                <Link to="/signin" className="navlinks" onClick={closeMenu}>
+                  Sign in
+                </Link>
+              </li>
+            ) : (
+              <li className="nav-items">
+                <Link to="/" className="navlinks" onClick={handleSignout}>
+                  Sign out
                 </Link>
               </li>
             )}

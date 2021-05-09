@@ -2,24 +2,49 @@ import React, { useState, useEffect } from "react";
 import DataTable from "./datatable/DataTable";
 import FetchUser from "../../fetchAPI/FetchUser";
 import FetchClass from "../../fetchAPI/FetchClass";
+import axios from 'axios'
 
 function FetchStudents() {
-  // const [students, setStudents] = useState([]);
+  const [students, setStudents] = useState([]);
+  const [classes, setClasses] = useState([]);
+  const [isStudent, setIsStudent] = useState(false)
   const [searchValue, setSearchValue] = useState("");
   const [searchCols, setSearchCols] = useState([]);
   const [classOption, setClassOption] = useState([]);
   const [isSubmit, setIsSubmit] = useState(false);
 
-  const { students, isStudent } = FetchUser(
-    "https://my-json-server.typicode.com/typicode/demo/posts"
-  );
-  const { classes } = FetchClass("bareurl");
-  
-  const [pagination, setPagination] = useState({
-    page: 1,
-    limit: 20,
-    totalRows: students.length,
-  });
+  const fetchStudent = async () => {
+    try{
+    const response = await axios.get(`${'bareurl'}/user`);//user
+    setStudents(response.data);
+    // check role, condition: temporary true 
+    if(true){
+        setIsStudent(true)
+    }
+  }catch(error){
+    console.log(error.messsage)
+  }
+  };
+  const fetchClasses = async () => {
+    try {
+      const response = await axios.get(`${'bareurl'}/class`);
+      setClasses(response.data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  useEffect(() => {
+      fetchStudent('bareurl')
+      fetchClasses('bareurl')
+  }, [])
+
+  // test fake url
+  // const {students, isStudent } = FetchUser(
+  //   "https://jsonplaceholder.typicode.com/users/1/todos"
+  // );
+
+  // const { classes }  = FetchClass("bareurl");
 
   function searchStudents(rows) {
     return rows.filter((row) =>
@@ -31,6 +56,7 @@ function FetchStudents() {
     );
   }
 
+  // search field
   const handleSearchField = (col) => {
     const checked = searchCols.includes(col);
     setSearchCols((prev) =>
@@ -38,10 +64,12 @@ function FetchStudents() {
     );
   };
 
+  // handle when choose option
   const handleClassOption = (e) => {
     setClassOption(e.target.value);
   };
 
+  // handle event when click submit
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmit(true);
