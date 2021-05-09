@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Button } from "../button/Button";
 import "./Navbar.css";
+import { NavDropdown, Nav } from "react-bootstrap";
 
-function Navbar({ signedIn }) {
+//{ SignedIn }
+function Navbar() {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
-  // const [signin, setSignin] = useState(false)
+  // const [signedIn, setSignedIn] = useState(SignedIn);
 
   const showButton = () => {
     if (window.innerWidth <= 960) {
@@ -22,16 +24,20 @@ function Navbar({ signedIn }) {
   const handleClick = () => {
     setClick(!click);
   };
-  // console.log(click);
   const closeMenu = () => {
     setClick(false);
   };
   window.addEventListener("resize", showButton);
 
+  const history = useHistory();
   const handleSignout = () => {
     setClick(false);
-    signedIn = false;
+    // setSignedIn(false);
+    localStorage.clear();
+    // history.push('/signin')
   };
+
+  let username = JSON.parse(localStorage.getItem("user-info"));
 
   return (
     <>
@@ -44,22 +50,27 @@ function Navbar({ signedIn }) {
           <div className="menu-icon" onClick={handleClick}>
             <i className={click ? "fas fa-times" : "fas fa-bars"}></i>
           </div>
+
           <ul className={click ? "nav-menu active" : "nav-menu"}>
             <li className="nav-items">
               <Link to="/" className="navlinks" onClick={closeMenu}>
                 Home
               </Link>
             </li>
-            {signedIn ? (
+            {/* {localStorage.getItem('user-info') ? ( */}
+            {false ? (
               <li className="nav-items">
-                <Link to="/signin" className="navlinks" onClick={closeMenu}>
-                  Sign in
+                {/* <NavDropdown title= {username && username.name}>
+                  <NavDropdown.Item onClick = {handleSignout}>Sign out</NavDropdown.Item> */}
+                <Link to="/signin" className="navlinks" onClick={handleSignout}>
+                  Sign out
                 </Link>
+                {/* </NavDropdown> */}
               </li>
             ) : (
               <li className="nav-items">
-                <Link to="/" className="navlinks" onClick={handleSignout}>
-                  Sign out
+                <Link to="/signin" className="navlinks" onClick={closeMenu}>
+                  Sign in
                 </Link>
               </li>
             )}

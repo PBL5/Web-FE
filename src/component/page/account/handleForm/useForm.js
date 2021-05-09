@@ -8,7 +8,6 @@ const useForm = ({validate}) =>{
     })
 
     const [errors, setErrors] = useState({})
-    // have not submitted yet
     const [isSubmiting, setIsSubmitting] = useState(false)
 
     // 
@@ -19,7 +18,7 @@ const useForm = ({validate}) =>{
             [name]: value
         })
     }
-    // do not refresh when click submit, it means input fields doesn't lose value
+    // do not refresh when click submit, it means input fields doesn't lose values
     const handleSubmit = (e) =>{
         e.preventDefault()
         setErrors(validate(values))

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import DataTable from "./datatable/DataTable";
-import FetchUser from "../../fetchAPI/FetchUser";
-import FetchClass from "../../fetchAPI/FetchClass";
 import axios from 'axios'
+import './ShowStudent.css'
 
 function FetchStudents() {
   const [students, setStudents] = useState([]);
@@ -78,9 +77,10 @@ function FetchStudents() {
   const columns = students[0] && Object.keys(students[0]);
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>
+    <>
+    <div className = 'form-ct'>
+      <form onSubmit={handleSubmit} className = 'form'>
+        <label className = 'form-label'>
           Choose class to show students list
           {classes &&
             classes.map((perClass) => (
@@ -89,18 +89,20 @@ function FetchStudents() {
               </select>
             ))}
         </label>
-        <input type="submit" value="Show" />
-      </form>
-      <div>
+        <button className = 'form-button-show' type="submit">Show</button>
+
+        <label className = 'form-label'>Search students</label>
         <input
           type="text"
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
+          className = 'form-input'
         />
         {columns &&
           columns.map((col) => (
-            <label>
+            <label className = 'form-label'>
               <input
+                className = 'form-input-checkbox'
                 type="checkbox"
                 checked={searchCols.includes(col)}
                 onChange={() => {
@@ -110,13 +112,16 @@ function FetchStudents() {
               {col}
             </label>
           ))}
+          </form>
       </div>
+     <div>
       {isSubmit && isStudent && (
         <div>
           <DataTable students={searchStudents(students)} />
         </div>
       )}
     </div>
+    </>
   );
 }
 

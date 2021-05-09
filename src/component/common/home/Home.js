@@ -4,7 +4,7 @@ import './Home.css'
 import purplesky from '../../../images/purplesky_1.jpg'
 
 
-function Home({setSignin}) {
+function Home() {
     // setSignin: prop nhận từ signin: nếu đã signin thì home không hiển thị 2 button: Signin và Watchtutorial
     
     return (

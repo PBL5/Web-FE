@@ -3,7 +3,6 @@ import React from "react";
 const DataTable = ({ students }) => {
   
   const columns = students[0] && Object.keys(students[0]);
-
   return (
     <>
       <table cellPadding={0} cellSpacing={0}>
@@ -27,8 +26,6 @@ const DataTable = ({ students }) => {
 
 export default DataTable;
 /*
-- 1 có trường checkbox hoặc hiển thị luôn ds có mặt; 
-- button điểm danh  --> server --> rasp --> api đẩy lên lại FE; 
 -   {/*- những phần tử tiếp theo là giá trị infor của 1 student, students map đến phần tử đó, 
             - mỗi phần tử lại map đến từng phần tử hàng đó
             - giống như mảng 2 chiều, mà mỗi hàng là 1 mảng con  

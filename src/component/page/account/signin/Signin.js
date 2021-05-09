@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Signup.css";
+import "./Signin.css";
 import { Redirect } from "react-router-dom";
 import validate from "../handleForm/validateInput";
 import useForm from "../handleForm/useForm";
@@ -13,8 +13,9 @@ function Signin({ submitForm }) {
 
   const [signedIn, setSignedIn] = useState(false);
 
+  //fake url http://127.0.0.1:8000/auth/
   const handleSignin = (e) => {
-    fetch("bareurl", {
+    fetch("http://127.0.0.1:8000/auth/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
@@ -32,12 +33,12 @@ function Signin({ submitForm }) {
       setSignedIn(true);
     }
   };
-
+//SignedIn={signedIn}
   if (signedIn) {
     return (
       <>
-        <Navbar signedIn={signedIn} />
-        <Redirect to="/fetchstudents" />
+        <Navbar  />
+        <Redirect to="/startcam" />
       </>
     );
   }
