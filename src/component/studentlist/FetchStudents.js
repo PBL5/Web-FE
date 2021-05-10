@@ -1,32 +1,32 @@
 import React, { useState, useEffect } from "react";
 import DataTable from "./datatable/DataTable";
-import axios from 'axios'
-import './ShowStudent.css'
+import axios from "axios";
+import "./ShowStudent.css";
 
 function FetchStudents() {
   const [students, setStudents] = useState([]);
   const [classes, setClasses] = useState([]);
-  const [isStudent, setIsStudent] = useState(false)
+  const [isStudent, setIsStudent] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [searchCols, setSearchCols] = useState([]);
   const [classOption, setClassOption] = useState([]);
   const [isSubmit, setIsSubmit] = useState(false);
 
   const fetchStudent = async () => {
-    try{
-    const response = await axios.get(`${'bareurl'}/user`);//user
-    setStudents(response.data);
-    // check role, condition: temporary true 
-    if(true){
-        setIsStudent(true)
+    try {
+      const response = await axios.get(`${"bareurl"}/user`); //user
+      setStudents(response.data);
+      // check role, condition: temporary true
+      if (true) {
+        setIsStudent(true);
+      }
+    } catch (error) {
+      console.log(error.messsage);
     }
-  }catch(error){
-    console.log(error.messsage)
-  }
   };
   const fetchClasses = async () => {
     try {
-      const response = await axios.get(`${'bareurl'}/class`);
+      const response = await axios.get(`${"bareurl"}/class`);
       setClasses(response.data);
     } catch (error) {
       console.log(error.message);
@@ -34,9 +34,9 @@ function FetchStudents() {
   };
 
   useEffect(() => {
-      fetchStudent('bareurl')
-      fetchClasses('bareurl')
-  }, [])
+    fetchStudent("bareurl");
+    fetchClasses("bareurl");
+  }, []);
 
   // test fake url
   // const {students, isStudent } = FetchUser(
@@ -78,49 +78,51 @@ function FetchStudents() {
 
   return (
     <>
-    <div className = 'form-ct'>
-      <form onSubmit={handleSubmit} className = 'form'>
-        <label className = 'form-label'>
-          Choose class to show students list
-          {classes &&
-            classes.map((perClass) => (
-              <select value="Choose class" onChange={handleClassOption}>
-                <option value={perClass}>{perClass}</option>
-              </select>
+      <div className="form-ct">
+        <form onSubmit={handleSubmit} className="show-form">
+          <label className="show-form-label">
+            Choose class to show students list
+            {classes &&
+              classes.map((perClass) => (
+                <select value="Choose class" onChange={handleClassOption}>
+                  <option value={perClass}>{perClass}</option>
+                </select>
+              ))}
+          </label>
+          <button className="show-form-button-show" type="submit">
+            Show
+          </button>
+            <br/>
+          <label className="show-form-label">Search students</label>
+          <input
+            type="text"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+            className="show-form-input"
+          />
+          {columns &&
+            columns.map((col) => (
+              <label className="show-form-label">
+                <input
+                  className="show-form-input-checkbox"
+                  type="checkbox"
+                  checked={searchCols.includes(col)}
+                  onChange={() => {
+                    handleSearchField(col);
+                  }}
+                />
+                {col}
+              </label>
             ))}
-        </label>
-        <button className = 'form-button-show' type="submit">Show</button>
-
-        <label className = 'form-label'>Search students</label>
-        <input
-          type="text"
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
-          className = 'form-input'
-        />
-        {columns &&
-          columns.map((col) => (
-            <label className = 'form-label'>
-              <input
-                className = 'form-input-checkbox'
-                type="checkbox"
-                checked={searchCols.includes(col)}
-                onChange={() => {
-                  handleSearchField(col);
-                }}
-              />
-              {col}
-            </label>
-          ))}
-          </form>
+        </form>
       </div>
-     <div>
-      {isSubmit && isStudent && (
-        <div>
-          <DataTable students={searchStudents(students)} />
-        </div>
-      )}
-    </div>
+      <div>
+        {isSubmit && isStudent && (
+          <div>
+            <DataTable students={searchStudents(students)} />
+          </div>
+        )}
+      </div>
     </>
   );
 }
