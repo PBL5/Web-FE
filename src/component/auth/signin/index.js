@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
-import './index.css'
-import { apiRequest, GET, LOGIN_ENTRY_POINT, POST } from '../../../utils/apiRequest';
+import './index.css';
+import {
+  apiRequest,
+  GET,
+  LOGIN_ENTRY_POINT,
+  POST
+} from '../../../utils/apiRequest';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../../utils/actions/auth.action';
+import { useHistory } from 'react-router';
 
 const SignIn = ({ submitForm }) => {
   const [signedIn, setSignedIn] = useState(false);
@@ -12,6 +20,8 @@ const SignIn = ({ submitForm }) => {
     emailError: '',
     passwordError: ''
   });
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleChange = (e) => {
     setDataSignIn({
@@ -23,15 +33,17 @@ const SignIn = ({ submitForm }) => {
   const handleSignin = async (e) => {
     e.preventDefault();
 
-    const payload = {...dataSignIn};
+    const payload = { ...dataSignIn };
     const result = await apiRequest(LOGIN_ENTRY_POINT, 'post', payload);
-    console.log(result);
+
+    dispatch(setUser(result.data));
+    history.push('/');
   };
 
-  // if (signedIn) {
-  //   window.location.href = '/';
-  //   return;
-  // }
+  if (signedIn) {
+    window.location.href = '/';
+    return;
+  }
 
   return (
     <div className='form-content'>
