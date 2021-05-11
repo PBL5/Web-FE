@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { Button } from "../button/Button";
 import "./Navbar.css";
-import { NavDropdown, Nav } from "react-bootstrap";
 
 //{ SignedIn }
 function Navbar() {
@@ -39,6 +37,7 @@ function Navbar() {
 
   let username = JSON.parse(localStorage.getItem("user-info"));
 
+  const tmp = true;
   return (
     <>
       <nav className="navbar">
@@ -58,7 +57,7 @@ function Navbar() {
               </Link>
             </li>
             {/* {localStorage.getItem('user-info') ? ( */}
-            {false ? (
+            {tmp === false ? (
               <li className="nav-items">
                 {/* <NavDropdown title= {username && username.name}>
                   <NavDropdown.Item onClick = {handleSignout}>Sign out</NavDropdown.Item> */}

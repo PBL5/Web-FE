@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import DataTable from "./datatable/DataTable";
+import StudentListPage from "./datatable/DataTable";
 import axios from "axios";
 import "./ShowStudent.css";
 
@@ -119,7 +119,7 @@ function FetchStudents() {
       <div>
         {isSubmit && isStudent && (
           <div>
-            <DataTable students={searchStudents(students)} />
+            <StudentListPage students={searchStudents(students)} />
           </div>
         )}
       </div>
