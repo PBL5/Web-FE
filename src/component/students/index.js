@@ -1,32 +1,30 @@
-import React, { useState, useEffect } from "react";
-import StudentListPage from "./datatable/DataTable";
-import axios from "axios";
-import "./ShowStudent.css";
+import React, { useState, useEffect } from 'react';
+import StudentListPage from '../../component/studentlist/datatable/DataTable';
+import axios from 'axios';
+import './ShowStudent.css';
 
 function FetchStudents() {
   const [students, setStudents] = useState([]);
   const [classes, setClasses] = useState([]);
   const [isStudent, setIsStudent] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState('');
   const [searchCols, setSearchCols] = useState([]);
   const [classOption, setClassOption] = useState([]);
   const [isSubmit, setIsSubmit] = useState(false);
 
   const fetchStudent = async () => {
     try {
-      const response = await axios.get(`${"bareurl"}/user`); //user
+      const response = await axios.get(`${'bareurl'}/user`); //user
       setStudents(response.data);
       // check role, condition: temporary true
-      if (true) {
-        setIsStudent(true);
-      }
+      setIsStudent(true);
     } catch (error) {
       console.log(error.messsage);
     }
   };
   const fetchClasses = async () => {
     try {
-      const response = await axios.get(`${"bareurl"}/class`);
+      const response = await axios.get(`${'bareurl'}/class`);
       setClasses(response.data);
     } catch (error) {
       console.log(error.message);
@@ -34,8 +32,8 @@ function FetchStudents() {
   };
 
   useEffect(() => {
-    fetchStudent("bareurl");
-    fetchClasses("bareurl");
+    fetchStudent('bareurl');
+    fetchClasses('bareurl');
   }, []);
 
   // test fake url
@@ -78,34 +76,38 @@ function FetchStudents() {
 
   return (
     <>
-      <div className="form-ct">
-        <form onSubmit={handleSubmit} className="show-form">
-          <label className="show-form-label">
+      <div className='form-ct'>
+        <form onSubmit={handleSubmit} className='show-form'>
+          <label className='show-form-label'>
             Choose class to show students list
             {classes &&
-              classes.map((perClass) => (
-                <select value="Choose class" onChange={handleClassOption}>
+              classes.map((perClass, key) => (
+                <select
+                  value='Choose class'
+                  onChange={handleClassOption}
+                  key={key}
+                >
                   <option value={perClass}>{perClass}</option>
                 </select>
               ))}
           </label>
-          <button className="show-form-button-show" type="submit">
+          <button className='show-form-button-show' type='submit'>
             Show
           </button>
-            <br/>
-          <label className="show-form-label">Search students</label>
+          <br />
+          <label className='show-form-label'>Search students</label>
           <input
-            type="text"
+            type='text'
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
-            className="show-form-input"
+            className='show-form-input'
           />
           {columns &&
-            columns.map((col) => (
-              <label className="show-form-label">
+            columns.map((col, key) => (
+              <label className='show-form-label' key={key}>
                 <input
-                  className="show-form-input-checkbox"
-                  type="checkbox"
+                  className='show-form-input-checkbox'
+                  type='checkbox'
                   checked={searchCols.includes(col)}
                   onChange={() => {
                     handleSearchField(col);

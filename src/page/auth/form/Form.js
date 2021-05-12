@@ -1,19 +1,19 @@
-import React, {useState} from 'react'
-import Signup from '../Signup'
-import Homepage from '../../Homepage'
+import React, { useState } from 'react';
+import Signup from '../Signup';
+import Homepage from '../../Homepage';
 
-const  Form = ()=> {
-    const [isSubmitted, setIsSubmitted] = useState(false)
+const Form = () => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-    function submitForm(){
-        setIsSubmitted(true)
-    }
-    return (
-        <div>
-            <Signup/>
-            {!isSubmitted? (<Signup submitForm = {submitForm}/>):(<Homepage/>)}
-        </div>
-    )
-}
+  function submitForm() {
+    setIsSubmitted(true);
+  }
+  return (
+    <div>
+      <Signup />
+      {!isSubmitted ? <Signup submitForm={submitForm} /> : <Homepage />}
+    </div>
+  );
+};
 
-export default Form
+export default Form;
