@@ -1,10 +1,12 @@
-import './Navbar.css';
-
+import clsx from 'clsx';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
 import { NavDropdown } from 'react-bootstrap';
-import { logout } from '../../../utils/actions/auth.action';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from 'src/utils/actions/auth.action';
+
+import styles from './Navbar.module.css';
 
 function Navbar() {
   const [click, setClick] = useState(false);
@@ -12,7 +14,8 @@ function Navbar() {
 
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-  const history = useHistory();
+
+  const router = useRouter();
 
   const showButton = () => {
     if (window.innerWidth <= 960) {
@@ -33,41 +36,38 @@ function Navbar() {
     setClick(false);
   };
 
-  window.addEventListener('resize', showButton);
-
   const handleSignout = () => {
     setClick(false);
     dispatch(logout());
-    history.push('/signin');
+    router.push('/signin');
   };
 
   return (
     <>
-      <nav className='navbar'>
-        <div className='navbar-container'>
-          <Link to='/' className='navbar-logo'>
-            <i className='far fa-smile-beam'></i>
+      <nav className={styles.navbar}>
+        <div className={styles.navbarContainer}>
+          <Link href='/' className={styles.navbarLogo}>
+            <i className={clsx(styles.icon, 'far fa-smile-beam')}></i>
             {/* 18TCLC_DT3 */}
           </Link>
-          <div className='menu-icon' onClick={handleClick}>
+          <div className={styles.menuIcon} onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'}></i>
           </div>
 
-          <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+          <ul className={clsx(styles.navMenu, click && styles.active)}>
             <li className='nav-items'>
-              <Link to='/' className='navlinks' onClick={closeMenu}>
+              <Link href='/' className='navlinks' onClick={closeMenu}>
                 Home
               </Link>
             </li>
-            {/* {localStorage.getItem('user-info') ? ( */}
             {auth.isSignedIn ? (
-              <li className='nav-items'>
+              <li className={styles.navItems}>
                 <NavDropdown title={auth && auth.user.full_name}>
                   <NavDropdown.Item onClick={handleSignout}>
                     Sign out
                   </NavDropdown.Item>
                   <Link
-                    to='/signin'
+                    href='/signin'
                     className='navlinks'
                     onClick={handleSignout}
                   >
@@ -76,8 +76,8 @@ function Navbar() {
                 </NavDropdown>
               </li>
             ) : (
-              <li className='nav-items'>
-                <Link to='/signin' className='navlinks' onClick={closeMenu}>
+              <li className={styles.navItems}>
+                <Link href='/auth/signin' className='navlinks' onClick={closeMenu}>
                   Sign in
                 </Link>
               </li>
@@ -90,9 +90,3 @@ function Navbar() {
 }
 
 export default Navbar;
-// Link: click in logo --> go to nowhere
-/*menu icon: 3 sọc ngang, exit; click vào để hiển thị menu thì icon trở thành
-     exit-icon, còn bình thường thì 3 sọc useSate: set trạng thái cho click ban
-     đầu là  false tức hiển thị 3 sọc; nếu click vào thì qua hàm handleClick
-     chuyển thành !false = true --> thành exit
-  */

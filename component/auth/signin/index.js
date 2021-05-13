@@ -1,13 +1,8 @@
 import React, { useState } from 'react';
-import './index.css';
-import {
-  apiRequest,
-  GET,
-  LOGIN_ENTRY_POINT,
-  POST
-} from '../../../utils/apiRequest';
+import styles from './index.module.css';
+import { apiRequest, GET, LOGIN_ENTRY_POINT, POST } from 'src/utils/apiRequest';
 import { useDispatch } from 'react-redux';
-import { setUser } from '../../../utils/actions/auth.action';
+import { setUser } from 'src/utils/actions/auth.action';
 import { useHistory } from 'react-router';
 
 const SignIn = ({ submitForm }) => {
@@ -46,17 +41,17 @@ const SignIn = ({ submitForm }) => {
   }
 
   return (
-    <div className='form-content'>
-      <form className='form' onSubmit={handleSignin}>
-        <div className='form-inputs'>
-          <label htmlFor='email' className='form-label'>
+    <div className={styles.formContent}>
+      <form className={styles.form} onSubmit={handleSignin}>
+        <div className={styles.formInputs}>
+          <label htmlFor='email' className={styles.formLabel}>
             Email
           </label>
           <input
             id='email'
             type='text'
             name='email'
-            className='form-input'
+            className={styles.formInput}
             placeholder='Email'
             value={dataSignIn.email}
             onChange={handleChange}
@@ -65,22 +60,26 @@ const SignIn = ({ submitForm }) => {
           {error.emailError && <p>{error.emailError}</p>}
         </div>
 
-        <div className='form-inputs'>
-          <label htmlFor='password' className='form-label'>
+        <div className={styles.formInputs}>
+          <label htmlFor='password' className={styles.formLabel}>
             Password
           </label>
           <input
             id='password'
             type='password'
             name='password'
-            className='form-input'
+            className={styles.formInput}
             placeholder='Password'
             value={dataSignIn.password}
             onChange={handleChange}
           />
           {error.passwordError && <p>{error.passwordError}</p>}
         </div>
-        <button className='form-input-btn' type='submit' onClick={handleSignin}>
+        <button
+          className={styles.formInputBtn}
+          type='submit'
+          onClick={handleSignin}
+        >
           Sign in
         </button>
       </form>

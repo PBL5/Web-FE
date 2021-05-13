@@ -1,8 +1,8 @@
-body {
-  background: linear-gradient(to right, #553086, #4d6094);
-}
+/* body { */
+  /* background: linear-gradient(to right, #553086, #4d6094); */
+/* } */
 
-.form-content {
+.formContent {
   margin: 60px auto;
   width: 400px;
   box-shadow: 0 6px 10px 0 rgba(66, 48, 138, 0.2),
@@ -28,19 +28,19 @@ body {
   align-items: center;
 }
 
-.form-inputs {
+.formInputs {
   margin-bottom: 0.5rem;
   width: 100%;
   margin-left: 62px;
 }
 
-.form-inputs p {
+.formInputs p {
   font-size: 12px;
   margin-top: 0.5rem;
   color: #f00e0e;
 }
 
-.form-label {
+.formLabel {
   margin-top: 16px;
   display: inline-block;
   font-size: 16px;
@@ -50,7 +50,7 @@ body {
   font-weight: bold;
 }
 
-.form-input {
+.formInput {
   display: block;
   padding-left: 10px;
   outline: none;
@@ -60,16 +60,16 @@ body {
   border: 1px solid #553086;
 }
 
-.form-input:focus {
+.formInput:focus {
   background-color: white;
 }
 
-.form-input::placeholder {
+.formInput::placeholder {
   color: thistle;
   font-size: 12px;
 }
 
-.form-input-btn {
+.formInputBtn {
   width: 80%;
   height: 50px;
   margin-top: 10px;
@@ -81,28 +81,8 @@ body {
   background: linear-gradient(to right, #d7c0e5, #ffffff);
 }
 
-.form-input-btn:hover {
+.formInputBtn:hover {
   cursor: pointer;
   background: linear-gradient(to right, #553086, #8f9bb9);
   transition: all 0.4s ease-out;
 }
-/* 
- .form-input-login {
-   margin-top: 16px;
-   color: black;
-   width: 80%;
-   text-align: center;
-   border-radius: 4px;
-   font-size: 14px;
-   font-family: sans-serif;
-   font-weight: bold;
-   white-space: unset;
- }
- 
- .form-input-login a {
-   text-decoration: none;
-   color: rgb(81, 18, 163);
-   font-weight: 600;
-   margin-bottom: 16px;
-   margin-top: 14px;
- } */
