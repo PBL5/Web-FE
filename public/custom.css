@@ -9,11 +9,10 @@ html {
   margin: 0;
 }
 body {
-  position: fixed;
+  /* position: fixed; */
   padding: 0;
   margin: 0;
   background-image: url('../src/images/unsplash_2.jpg');
-  /* background: rgb(99, 35, 172); */
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
@@ -21,3 +20,4 @@ body {
   justify-content: center;
   
 }
+

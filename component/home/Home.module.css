@@ -45,9 +45,10 @@ font-family: 'Roboto', sans-serif;
 }
 
 .heroItems > p{
-font-size: clamp(2rem, 2.5vw, 3rem);
+font-size: clamp(2rem, 2vw, 3rem);
 margin-bottom: 2rem;
 font-family: 'Roboto', sans-serif;
+color: slategrey;
 }
 
 .heroButton{
@@ -85,14 +86,14 @@ border-color: transparent transparent rgb(162, 0, 255) transparent;
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 960px) {
   .homeContainer > h1 {
-    font-size: 50px;
+    font-size: 46px;
     margin-top: -100px;
   }
 
   .homeContainer > p {
-    font-size: 30px;
+    font-size: 24px;
   }
 
   .btnMobile {

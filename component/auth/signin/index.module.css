@@ -68,6 +68,10 @@
 .formInput:focus {
   background-color: white;
 }
+.formInput:hover{
+  border-color: rgb(162, 0, 255) rgb(162, 0, 255) rgb(162, 0, 255) rgb(162, 0, 255) ;
+  box-shadow: 1px 1px 1px rgb(162, 0, 255);
+}
 
 .formInput::placeholder {
   color: thistle;
