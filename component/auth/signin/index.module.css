@@ -1,6 +1,11 @@
-/* body { */
-  /* background: linear-gradient(to right, #553086, #4d6094); */
-/* } */
+
+.formContainer{
+  background: transparent;
+  height: 100vh;
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+}
 
 .formContent {
   margin: 60px auto;
@@ -9,7 +14,7 @@
     0 10px 20px 0 rgba(79, 15, 128, 0.2);
   position: relative;
   border-radius: 10px;
-  height: 550px;
+  height: 450px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   background-color: white;
@@ -34,7 +39,7 @@
   margin-left: 62px;
 }
 
-.formInputs p {
+.formInputs > p {
   font-size: 12px;
   margin-top: 0.5rem;
   color: #f00e0e;

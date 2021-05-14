@@ -1,5 +1,6 @@
+
 .navbar {
-  background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(49, 43, 43) 100%);
+  background-color: rgba(0, 0, 0, 0.2);
   height: 80px;
   display: flex;
   justify-content: center;
@@ -30,9 +31,10 @@
   padding: 4px 8px;
 }
 
-.icon {
+.far fa-smile-beam {
   margin-right: 8px;
   font-size: 1.8rem;
+  align-items: left;
 }
 
 .navMenu {
@@ -50,7 +52,7 @@
   height: 80px;
 }
 
-.navlinks {
+.navLinks {
   color: #fff;
   display: flex;
   align-items: center;
@@ -59,17 +61,13 @@
   height: 100%;
 }
 
-.navlinks:hover {
-  border-bottom: 4px solid #fff;
+.navLinks:hover {
+  border-bottom: 4px solid rgb(162, 0, 255);
   transition: all 0.2s ease-out;
+
 }
 
-/* .fa-bars {
-    color: #fff;
-    margin-right: 4px;
-  } */
-
-.nav-links-mobile {
+.navLinksMobile {
   display: none;
 }
 
@@ -77,12 +75,17 @@
   display: none;
 }
 
+.icon {
+    margin-right: 8px;
+    font-size: 1.8rem;
+}
+
 @media screen and (max-width: 960px) {
   .NavbarItems {
     position: relative;
   }
 
-  .nav-menu {
+  .navMenu {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -92,17 +95,18 @@
     left: -100%;
     opacity: 1;
     transition: all 0.5s ease;
+   
   }
 
-  .nav-menu.active {
-    background: #242222;
+  .navMenu.active {
+    background: rgba(255, 255, 255, 0.4);
     left: 0;
     opacity: 1;
     transition: all 0.5s ease;
     z-index: 1;
   }
 
-  .navlinks {
+  .navLinks {
     text-align: center;
     padding: 2rem;
     width: 100%;
@@ -112,20 +116,20 @@
     color: rgb(86, 87, 187);
   }
 
-  .navlinks:hover {
+  .navLinks:hover {
     /* background-color: #fff; */
     color: #452dce;
     border-radius: 0;
   }
 
-  .navbar-logo {
+  .navbarLogo {
     position: absolute;
     top: 0;
     left: 0;
     transform: translate(25%, 50%);
   }
 
-  .menu-icon {
+  .menuIcon {
     display: block;
     position: absolute;
     top: 0;
@@ -140,7 +144,7 @@
     font-size: 2rem;
   }
 
-  .nav-links-mobile {
+  .navLinksMobile {
     display: block;
     text-align: center;
     margin: 2rem auto;
@@ -155,9 +159,10 @@
     transition: all 0.2s ease-out;
   }
 
-  .nav-links-mobile:hover {
+  .navLinksMobile:hover {
     background: #fff;
     color: #242424;
     transition: 250ms;
+    
   }
 }

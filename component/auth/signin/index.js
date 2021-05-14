@@ -56,7 +56,6 @@ const SignIn = ({ submitForm }) => {
             value={dataSignIn.email}
             onChange={handleChange}
           />
-          {/* errors.email is true --> run <p> */}
           {error.emailError && <p>{error.emailError}</p>}
         </div>
 

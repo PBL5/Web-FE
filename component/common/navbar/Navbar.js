@@ -46,19 +46,17 @@ function Navbar() {
     <>
       <nav className={styles.navbar}>
         <div className={styles.navbarContainer}>
-          <Link href='/' className={styles.navbarLogo}>
+          <a href='/' className={styles.navbarLogo}>
             <i className={clsx(styles.icon, 'far fa-smile-beam')}></i>
-            {/* 18TCLC_DT3 */}
-          </Link>
+          </a>
           <div className={styles.menuIcon} onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'}></i>
           </div>
-
           <ul className={clsx(styles.navMenu, click && styles.active)}>
-            <li className='nav-items'>
-              <Link href='/' className='navlinks' onClick={closeMenu}>
+            <li className= {styles.navItems}>
+              <a href='/' className={styles.navLinks} onClick={closeMenu}>
                 Home
-              </Link>
+              </a>
             </li>
             {auth.isSignedIn ? (
               <li className={styles.navItems}>
@@ -66,20 +64,25 @@ function Navbar() {
                   <NavDropdown.Item onClick={handleSignout}>
                     Sign out
                   </NavDropdown.Item>
-                  <Link
+                  <a
                     href='/signin'
-                    className='navlinks'
+                    className= {styles.navLinks}
                     onClick={handleSignout}
                   >
                     Sign out
-                  </Link>
+                  </a>
                 </NavDropdown>
               </li>
             ) : (
               <li className={styles.navItems}>
-                <Link href='/auth/signin' className='navlinks' onClick={closeMenu}>
+                <a href='/auth/signin' className={styles.navLinks} onClick={closeMenu}>
+              Sign in
+              </a>
+                {/* <a href='/auth/signin'>
+                  <button className={styles.navLinks} onClick={closeMenu}> 
                   Sign in
-                </Link>
+                  </button>
+                </a> */}
               </li>
             )}
           </ul>
