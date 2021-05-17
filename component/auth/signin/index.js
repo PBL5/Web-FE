@@ -3,7 +3,7 @@ import styles from './index.module.css';
 import { apiRequest, GET, LOGIN_ENTRY_POINT, POST } from 'src/utils/apiRequest';
 import { useDispatch } from 'react-redux';
 import { setUser } from 'src/utils/actions/auth.action';
-import { useHistory } from 'react-router';
+import { useRouter } from 'next/router'
 
 const SignIn = ({ submitForm }) => {
   const [signedIn, setSignedIn] = useState(false);
@@ -16,7 +16,7 @@ const SignIn = ({ submitForm }) => {
     passwordError: ''
   });
   const dispatch = useDispatch();
-  const history = useHistory();
+  const router = useRouter();
 
   const handleChange = (e) => {
     setDataSignIn({
@@ -29,10 +29,10 @@ const SignIn = ({ submitForm }) => {
     e.preventDefault();
 
     const payload = { ...dataSignIn };
-    const result = await apiRequest(LOGIN_ENTRY_POINT, 'post', payload);
+    const result = await apiRequest(LOGIN_ENTRY_POINT, POST, payload);
 
     dispatch(setUser(result.data));
-    history.push('/');
+    router.push('/');
   };
 
   if (signedIn) {

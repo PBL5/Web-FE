@@ -12,40 +12,6 @@ function StudentsList() {
   const [classOption, setClassOption] = useState([]);
   const [isSubmit, setIsSubmit] = useState(false);
 
-  const fetchStudent = async () => {
-    try {
-      const response = await axios.get(`${'bareurl'}/user`); //user
-      setStudents(response.data);
-      // check role, condition: temporary true
-      setIsStudent(true);
-    } catch (error) {
-      console.log(error.messsage);
-    }
-  };
-  const fetchClasses = async () => {
-    try {
-      const response = await axios.get(`${'bareurl'}/class`);
-      setClasses(response.data);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
-  useEffect(() => {
-    fetchStudent('bareurl');
-    fetchClasses('bareurl');
-  }, []);
-
-  function searchStudents(rows) {
-    return rows.filter((row) =>
-      searchCols.some(
-        (col) =>
-          row[col].toString().toLowerCase().indexOf(searchValue.toLowerCase()) >
-          -1
-      )
-    );
-  }
-
   // search field
   const handleSearchField = (col) => {
     const checked = searchCols.includes(col);
@@ -123,25 +89,3 @@ function StudentsList() {
 }
 
 export default StudentsList;
-
-/* handleSearchField
-    - tìm kiếm sinh viên theo các label, check vào label muốn tìm
-    - check and uncheck
-    - searchCols là mảng chứa những label tìm kiếm, ví dụ tìm theo firstName, lastName, ..
-    - ...prevState chứa tất cả những giá trị đó, kiểm tra xem checkbox có đc check hay không để remove nó ra khỏi mảng
-    */
-
-/* searchStudent
-       - return all the rows matching with the input value
-       - giá trị cái cột có khi là kiểu số nên phải cast về String, vì giá trị của searchField là text 
-       - cast toLowercase 2 vế so sánh, không thì tìm không ra
-       - met moi vl vay :) dep di
-       */
-
-/*
-  useEffect(() => {
-    fetch("")
-      .then((res) => res.json())
-      .then((result) => setStudents(result));
-  }, []);
-  */
