@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const StudentList = ({ students }) => {
+const StudentsTable = ({ students }) => {
   const columns = students[0] && Object.keys(students[0]);
   return (
     <>
@@ -26,7 +26,7 @@ const StudentList = ({ students }) => {
   );
 };
 
-export default StudentList;
+export default StudentsTable;
 /*
 -   {/*- những phần tử tiếp theo là giá trị infor của 1 student, students map đến phần tử đó, 
             - mỗi phần tử lại map đến từng phần tử hàng đó

@@ -1,8 +1,11 @@
+import { createWrapper } from 'next-redux-wrapper';
 import { combineReducers, createStore } from 'redux';
 import authReducer from '../reducers/auth.reducer';
 
 const reducers = combineReducers({ auth: authReducer });
 
-const store = createStore(reducers);
+const initStore = () => {
+  return createStore(reducers);
+};
 
-export default store;
+export const wrapper = createWrapper(initStore);

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import StudentListPage from '../../component/studentlist/datatable/DataTable';
 import axios from 'axios';
-import './ShowStudent.css';
+import styles from './index.module.css';
+import StudentsTable from './list';
 
-function FetchStudents() {
+function StudentsList() {
   const [students, setStudents] = useState([]);
   const [classes, setClasses] = useState([]);
   const [isStudent, setIsStudent] = useState(false);
@@ -35,13 +35,6 @@ function FetchStudents() {
     fetchStudent('bareurl');
     fetchClasses('bareurl');
   }, []);
-
-  // test fake url
-  // const {students, isStudent } = FetchUser(
-  //   "https://jsonplaceholder.typicode.com/users/1/todos"
-  // );
-
-  // const { classes }  = FetchClass("bareurl");
 
   function searchStudents(rows) {
     return rows.filter((row) =>
@@ -76,9 +69,9 @@ function FetchStudents() {
 
   return (
     <>
-      <div className='form-ct'>
-        <form onSubmit={handleSubmit} className='show-form'>
-          <label className='show-form-label'>
+      <div className={styles.root}>
+        <form onSubmit={handleSubmit} className={styles.showForm}>
+          <label className={styles.showFormLabel}>
             Choose class to show students list
             {classes &&
               classes.map((perClass, key) => (
@@ -91,22 +84,22 @@ function FetchStudents() {
                 </select>
               ))}
           </label>
-          <button className='show-form-button-show' type='submit'>
+          <button className={styles.showFormButtonShow} type='submit'>
             Show
           </button>
           <br />
-          <label className='show-form-label'>Search students</label>
+          <label className={styles.showFormLabel}>Search students</label>
           <input
             type='text'
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
-            className='show-form-input'
+            className={styles.showFormInput}
           />
           {columns &&
             columns.map((col, key) => (
-              <label className='show-form-label' key={key}>
+              <label className={styles.showFormLabel} key={key}>
                 <input
-                  className='show-form-input-checkbox'
+                  className={styles.showFormInputCheckbox}
                   type='checkbox'
                   checked={searchCols.includes(col)}
                   onChange={() => {
@@ -118,18 +111,18 @@ function FetchStudents() {
             ))}
         </form>
       </div>
-      <div>
+      {/*<div>
         {isSubmit && isStudent && (
           <div>
-            <StudentListPage students={searchStudents(students)} />
+            <StudentsTable students={searchStudents(students)} />
           </div>
         )}
-      </div>
+      </div>*/}
     </>
   );
 }
 
-export default FetchStudents;
+export default StudentsList;
 
 /* handleSearchField
     - tìm kiếm sinh viên theo các label, check vào label muốn tìm
