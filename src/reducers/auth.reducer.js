@@ -1,4 +1,4 @@
-import { getCookie, removeCookie, setCookie } from '../cookies';
+import { getCookie, removeCookie, setCookie } from '../utils/cookies';
 import { LOG_OUT, SET_USER } from '../types/auth.type';
 
 const defaultState = {

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { NavDropdown } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from 'src/utils/actions/auth.action';
+import { logout } from 'src/actions/auth.action';
 
 import styles from './Navbar.module.css';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import App, { Container } from 'next/app';
-import {wrapper} from 'src/utils/store';
+import {wrapper} from 'src/store';
 import Navbar from 'component/common/navbar/Navbar';
 import 'public/custom.css';
 

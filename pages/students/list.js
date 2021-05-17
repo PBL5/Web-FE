@@ -5,7 +5,7 @@ import {
   apiRequest,
   GET
 } from 'src/utils/apiRequest';
-import { wrapper } from 'src/utils/store';
+import { wrapper } from 'src/store';
 
 const StudentsListPage = () => {
   return <StudentsList />;

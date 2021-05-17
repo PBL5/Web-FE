@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './index.module.css';
 import { apiRequest, GET, LOGIN_ENTRY_POINT, POST } from 'src/utils/apiRequest';
 import { useDispatch } from 'react-redux';
-import { setUser } from 'src/utils/actions/auth.action';
+import { setUser } from 'src/actions/auth.action';
 import { useRouter } from 'next/router'
 
 const SignIn = ({ submitForm }) => {
