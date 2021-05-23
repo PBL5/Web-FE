@@ -4,9 +4,26 @@ import authReducer from '../reducers/auth.reducer';
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import studentReducer from 'src/reducers/student.reducer';
+import { getCookie } from 'src/utils/cookies';
 
 const reducers = (state, action) => {
-  if (action.type === HYDRATE) return { ...action.payload };
+  const defaultState = {
+    isSignedIn: false,
+    user: {}
+  };
+
+  let initialState = {};
+  const userCookie = getCookie('auth');
+  if (userCookie) {
+    initialState = JSON.parse(userCookie);
+  } else {
+    initialState = {
+      ...defaultState
+    };
+  }
+
+  if (action.type === HYDRATE)
+    return { ...action.payload, authProps: { ...initialState } };
   return combineReducers({
     authProps: authReducer,
     studentProps: studentReducer
