@@ -1,11 +1,27 @@
-import { createWrapper } from 'next-redux-wrapper';
-import { combineReducers, createStore } from 'redux';
+import { createWrapper, HYDRATE } from 'next-redux-wrapper';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
 import authReducer from '../reducers/auth.reducer';
+import thunkMiddleware from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import studentReducer from 'src/reducers/student.reducer';
 
-const reducers = combineReducers({ auth: authReducer });
+const reducers = (state, action) => {
+  if (action.type === HYDRATE) return { ...action.payload };
+  return combineReducers({
+    authProps: authReducer,
+    studentProps: studentReducer
+  })(state, action);
+};
 
-const initStore = () => {
-  return createStore(reducers);
+const initStore = (initialState = {}) => {
+  if (process.env.NODE_ENV !== 'production') {
+    return createStore(
+      reducers,
+      initialState,
+      composeWithDevTools(applyMiddleware(thunkMiddleware))
+    );
+  }
+  return createStore(reducers, initialState, applyMiddleware(thunkMiddleware));
 };
 
 export const wrapper = createWrapper(initStore);

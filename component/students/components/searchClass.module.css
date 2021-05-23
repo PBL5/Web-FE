@@ -1,0 +1,9 @@
+.title {
+  margin-top: 6px;
+  display: inline-block;
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: white;
+  font-family: sans-serif;
+  font-weight: bold;
+}

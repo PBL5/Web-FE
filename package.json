@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
     "clsx": "^1.1.1",
+    "cross-env": "^7.0.3",
     "js-cookie": "^2.2.1",
     "next": "^10.2.0",
     "next-redux-wrapper": "^6.0.2",
@@ -21,12 +22,13 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
     "redux": "^4.1.0",
+    "redux-thunk": "^2.3.0",
     "web-vitals": "^1.1.0"
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "build": "cross-env NODE_ENV=production next build",
+    "start": "cross-env NODE_ENV=production next start"
   },
   "eslintConfig": {
     "extends": [
@@ -45,5 +47,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "redux-devtools-extension": "^2.13.9"
   }
 }

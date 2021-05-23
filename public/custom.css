@@ -12,7 +12,7 @@ body {
   /* position: fixed; */
   padding: 0;
   margin: 0;
-  background-image: url('../src/images/unsplash_2.jpg');
+  background-image: url('images/unsplash_2.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;

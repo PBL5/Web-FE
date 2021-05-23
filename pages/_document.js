@@ -11,7 +11,6 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <title>Face Recognition</title>
           <link
             rel='stylesheet'
             href='https://use.fontawesome.com/releases/v5.13.1/css/all.css'

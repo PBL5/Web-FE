@@ -11,16 +11,6 @@
   width: 100%;
 }
 
-.showFormLabel {
-  margin-top: 6px;
-  display: inline-block;
-  font-size: 16px;
-  margin-bottom: 8px;
-  color: white;
-  font-family: sans-serif;
-  font-weight: bold;
-}
-
 .showFormInput {
   display: block;
   padding-left: 10px;
