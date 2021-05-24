@@ -39,7 +39,7 @@ function Navbar() {
   const handleSignout = () => {
     setClick(false);
     dispatch(logout());
-    router.push('/signin');
+    router.push('/auth/signin');
   };
 
   return (
@@ -59,18 +59,20 @@ function Navbar() {
               </a>
             </li>
             {authProps.isSignedIn ? (
-              <li className={styles.navItems}>
-                <NavDropdown title={authProps && authProps.user.full_name}>
-                  <NavDropdown.Item onClick={handleSignout}>
-                    Sign out
-                  </NavDropdown.Item>
-                  <a
-                    href='/signin'
-                    className={styles.navLinks}
-                    onClick={handleSignout}
-                  >
-                    Sign out
-                  </a>
+             <li className={styles.navItems}>
+             <NavDropdown className = {styles.navDropdown}
+              title={
+               <span className = {styles.navItemDropDown} >{authProps && authProps.user.full_name}</span>
+                 }
+               id="nav-dropdown"
+              >
+               <a
+                 href='/auth/signin'
+                 className= {styles.navLinksDropdown}
+                 onClick={handleSignout}
+               >
+                 Sign out
+               </a>
                 </NavDropdown>
               </li>
             ) : (

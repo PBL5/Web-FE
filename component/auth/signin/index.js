@@ -1,39 +1,13 @@
 import React, { useState } from 'react';
 import styles from './index.module.css';
-import { apiRequest, GET, LOGIN_ENTRY_POINT, POST } from 'src/utils/apiRequest';
-import { useDispatch } from 'react-redux';
-import { setUser } from 'src/actions/auth.action';
-import { useRouter } from 'next/router'
+import validateInput from './handleForm/validateInput';
+import handleForm from './handleForm/handleForm';
 
-const SignIn = ({ submitForm }) => {
+const SignIn = () => {
+
   const [signedIn, setSignedIn] = useState(false);
-  const [dataSignIn, setDataSignIn] = useState({
-    email: '',
-    password: ''
-  });
-  const [error, setError] = useState({
-    emailError: '',
-    passwordError: ''
-  });
-  const dispatch = useDispatch();
-  const router = useRouter();
-
-  const handleChange = (e) => {
-    setDataSignIn({
-      ...dataSignIn,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSignin = async (e) => {
-    e.preventDefault();
-
-    const payload = { ...dataSignIn };
-    const result = await apiRequest(LOGIN_ENTRY_POINT, POST, payload);
-
-    dispatch(setUser(result.data));
-    router.push('/');
-  };
+ 
+  const {handleChange, dataSignIn, handleSignin, errors} = handleForm({validateInput})
 
   if (signedIn) {
     window.location.href = '/';
@@ -56,7 +30,7 @@ const SignIn = ({ submitForm }) => {
             value={dataSignIn.email}
             onChange={handleChange}
           />
-          {error.emailError && <p>{error.emailError}</p>}
+          {errors.emailError && <p>{errors.emailError}</p>}
         </div>
 
         <div className={styles.formInputs}>
@@ -72,8 +46,10 @@ const SignIn = ({ submitForm }) => {
             value={dataSignIn.password}
             onChange={handleChange}
           />
-          {error.passwordError && <p>{error.passwordError}</p>}
+          {errors.passwordError && <p>{errors.passwordError}</p>}
+          {errors.both && <p>{errors.both}</p>}
         </div>
+
         <button
           className={styles.formInputBtn}
           type='submit'

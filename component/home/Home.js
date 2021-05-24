@@ -9,7 +9,7 @@ function Home() {
         <div className = {styles.heroItems}>
             <h1>Face Recognition</h1>
             <p>We are all ready for you</p>
-            <a href = '/auth/signin'><button className = {styles.heroButton}>Sign in</button></a>
+            <a href = '/aboutus/aboutus'><button className = {styles.heroButton}>About us</button></a>
         </div>
     </div>
 </div>

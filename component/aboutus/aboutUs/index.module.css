@@ -1,0 +1,144 @@
+
+.cardContainer{
+    /* background-color: rgb(82, 80, 80); */
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+.cardWrapper{
+    position: relative;
+    width: 100%;
+    padding: 70px 20px;
+    box-sizing: border-box;
+
+}
+.cardWrapper:hover, .cardWrapper:focus, .cardWrapper:active{
+    outline: none;
+    border: none;
+}
+
+.card{
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    border-radius:  16px;
+    position: relative;
+    cursor: pointer;
+    background-color: rgba(8, 8, 8, 0.5);
+}
+
+.cardImage{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: #000;
+    transition: .5s;
+}
+
+.img{
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.cardImage:hover > .img{
+opacity: 4;
+transition: .5s;
+}
+
+.cardImage:hover {
+    transform:translateY(-100px);
+    transition: .9s;
+
+}
+.socialIcons{
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform:translateY(-50%, -50%) ;
+    z-index: 3;
+    display: flex;
+}
+
+.socialIcons > .liStyles{
+    list-style: none;
+}
+
+ .socialIcons >  .liStyles > .aStyles{
+    position: relative;
+    display: block;
+    width: 50px;
+    height: 50%;
+    line-height: 50px;
+    text-align: center;
+    background: transparent;
+    font-size: 30px;
+    color: rgb(12, 12, 12);
+    margin: 0 6px;
+    transition: .4s;
+    transform: translateY(200px) ;
+    opacity:  0;
+}
+ 
+/* .liStyles{
+    list-style: none;
+} */
+
+/* .aStyles{
+    position: relative;
+    display: block;
+    width: 50px;
+    height: 50%;
+    line-height: 50px;
+    text-align: center;
+    background: #fff;
+    font-size: 24px;
+    color: #333;
+    margin: 0 6px;
+    transition: .4s;
+    transform: translateY(200px) ;
+    opacity:  0;
+} */
+
+.card:hover  .liStyles  .aStyles{
+    background-color: transparent;
+}
+.card:hover > .socialIcons .liStyles .aStyles  {
+    transform: translateY(0px);
+    opacity: 1;
+
+}
+.socialIcons .liStyles .aStyles .fa{
+    transition: .8s;
+    
+}
+
+.details{
+    position: absolute;
+    top: 71%;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    z-index: 1;
+    padding: 10px;
+    transition: .6s;
+}
+
+.details > h2{
+    margin: 30px 0;
+    padding:  0;
+    text-align: center;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+
+}
+
+.jobTitle{
+    font-size: 18px;
+    line-height: 2;
+    font-weight: 300;
+    display: block;
+
+}

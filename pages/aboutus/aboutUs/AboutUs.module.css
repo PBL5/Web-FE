@@ -1,0 +1,74 @@
+.cardWrapper{
+    position: relative;
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+
+}
+.cardWrapper:hover, .cardWrapper:focus, .cardWrapper:active{
+    outline: none;
+    border: none;
+}
+
+.card{
+    width: 100%;
+    height: 450px;
+    overflow: hidden;
+    border-radius:  16px;
+    position: relative;
+    cursor: pointer;
+}
+.cardImage{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: #000;
+    transition: .5s;
+
+}
+.img{
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+.img:hover{
+opacity: 4;
+transition: .5s;
+}
+.cardImage:hover{
+    transform:translateY(-100px);
+    transition: .9s;
+
+}
+.socialIcons{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform:translateY(-50%, -50%) ;
+    z-index: 3;
+    display: flex;
+}
+.liStyles{
+    list-style: none;
+}
+.aStyles{
+    position: relative;
+    display: block;
+    width: 50px;
+    height: 50%;
+    line-height: 50px;
+    text-align: center;
+    background: #fff;
+    font-size: 24px;
+    color: #333;
+    margin: 0 6px;
+    transition: .4s;
+    transform: translateY(200px) ;
+    opacity:  0;
+}
+.card:hover{
+    
+}
