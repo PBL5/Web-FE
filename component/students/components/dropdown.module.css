@@ -1,0 +1,38 @@
+
+.dropdownContainer {
+    /* must assign container position as relative */
+    position: relative;
+    width: 400px;
+   
+  }
+  
+  .dropdownTrigger {
+    padding: 10px 0px;
+  }
+  
+  .dropdownBody {
+    position: absolute;
+    /* top: 100%; */
+    width: 400px;
+    height: 700px;
+    padding: 30px 50px;
+  
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 6px;
+    border-radius: 7px;
+    right: 95px;
+    float: right;
+    justify-content: center;
+    z-index: 2;
+  }
+  
+.searchIcon{
+  margin-left: 50%;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.searchIcon:hover {
+  transition: all .5s ease-out;
+
+}
