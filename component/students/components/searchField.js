@@ -1,42 +1,64 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { DatePicker, Radio } from 'antd';
 import 'antd/dist/antd.css';
 import inputSt from './customInput.module.css';
-import clsx from 'clsx'
-import moment from 'moment'
+import clsx from 'clsx';
+import dayjs from 'dayjs';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  resetFilterOptions,
+  setFilterOptions
+} from 'src/actions/students.action';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+import moment from 'moment';
+import {
+  apiRequest,
+  POST,
+  STUDENT_LIST_ENTRY_POINT
+} from 'src/utils/apiRequest';
+
+dayjs.extend(customParseFormat);
 
 const SearchField = () => {
-  const [searchValue, setSearchValue] = useState({
-    fullname: '',
-    id: '',
-    email: '',
-    gender: '',
-    dob: '',
-  });
-    const handleClear = (e) =>{
-      setSearchValue({
-        fullname: '',
-        id: '',
-        email: '',
-        gender: e.target.defaultValue,
-        dob: '',
-      })
-        
-    }
-    const handleChange = (e) => {
-      const {name, value} = e.target
-      setSearchValue({
-          ...searchValue,
-          [name]: value
-      })
-      };
-    const dateFormat = 'DD/MM/YYYY';
+  const {
+    filterOptions: { class_id, filter_options }
+  } = useSelector((state) => state.studentProps);
+  const dispatch = useDispatch();
 
-    // console.log(searchValue.dob)
-    // console.log(searchValue.fullname)
-    // console.log(searchValue.id)
-    // console.log(searchValue.email)
-    // console.log(searchValue.gender)
+  const handleClear = () => {
+    dispatch(resetFilterOptions());
+  };
+
+  const handleChange = (e) => {
+    let { name, value } = e.target;
+
+    dispatch(
+      setFilterOptions({
+        class_id,
+        filter_options: { ...filter_options, [name]: value }
+      })
+    );
+  };
+  const dateFormat = 'DD/MM/YYYY';
+
+  const handleSearchStudents = async () => {
+    try {
+      let filterOptionPayload = { class_id, filter_options: {} };
+      for (const [key, value] of Object.entries(filter_options)) {
+        if (value !== '')
+          filterOptionPayload.filter_options[key] = value;
+      }
+
+      const response = await apiRequest(
+        STUDENT_LIST_ENTRY_POINT,
+        POST,
+        filterOptionPayload
+      );
+      console.log(response.data)
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className={inputSt.dropdownBody}>
@@ -46,11 +68,11 @@ const SearchField = () => {
           Full name
         </label>
         <input
-        value = {searchValue.fullname}
-        onChange={handleChange}
+          value={filter_options.full_name}
+          onChange={handleChange}
           type='text'
           placeholder='Enter fullname'
-          name='fullname'
+          name='full_name'
           className={inputSt.formInput}
         ></input>
       </div>
@@ -60,11 +82,11 @@ const SearchField = () => {
           Student ID
         </label>
         <input
-        value = {searchValue.id}
-        onChange={handleChange}
+          value={filter_options.student_id}
+          onChange={handleChange}
           type='text'
           placeholder='Enter student ID'
-          name='id'
+          name='student_id'
           className={inputSt.formInput}
         ></input>
       </div>
@@ -74,9 +96,9 @@ const SearchField = () => {
           Email
         </label>
         <input
-        value = {searchValue.email}
-        onChange={handleChange}
-          type='text'
+          value={filter_options.email}
+          onChange={handleChange}
+          type='email'
           placeholder='Enter student email'
           name='email'
           className={inputSt.formInput}
@@ -88,33 +110,47 @@ const SearchField = () => {
           Gender
         </label>
         <br />
-        <Radio.Group 
-        name='gender' 
-        defaultValue={1} 
-        v-model='value'
-        // value = {searchValue.gender}
-        onChange={handleChange}>
-          <Radio value={1} key = {1}  >Male</Radio>
-          <Radio value={0} key = {0}>Female</Radio>
+        <Radio.Group
+          name='gender'
+          defaultValue={1}
+          v-model='value'
+          value={filter_options.gender}
+          onChange={handleChange}
+        >
+          <Radio value='male' key={1}>
+            Male
+          </Radio>
+          <Radio value='female' key={0}>
+            Female
+          </Radio>
         </Radio.Group>
       </div>
 
       <div>
         <label className={inputSt.formLabel}>Date of birth</label>
         <br />
-        <DatePicker 
-        style={{ width: 200 }} 
-        id='date' 
-        name='date'
-        defaultValue={moment()} 
-        format={dateFormat}
-        value = {searchValue.dob}
-        // onChange={(date, text) => )
-         />
+        <DatePicker
+          style={{ width: 200 }}
+          id='date'
+          name='date'
+          format={dateFormat}
+          value={
+            filter_options.birthday === ''
+              ? moment()
+              : moment(filter_options.birthday, dateFormat)
+          }
+          onChange={(date, text) =>
+            handleChange({ target: { name: 'birthday', value: text } })
+          }
+        />
       </div>
       <div>
-          <button className = {inputSt.clearBtn} onClick = {handleClear}>Clear</button>
-          <button className = {inputSt.formInputBtn}>Search</button>
+        <button className={inputSt.clearBtn} onClick={handleClear}>
+          Clear
+        </button>
+        <button className={inputSt.formInputBtn} onClick={handleSearchStudents}>
+          Search
+        </button>
       </div>
     </div>
   );
