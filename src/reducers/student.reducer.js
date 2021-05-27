@@ -11,7 +11,7 @@ const default_filter_options = {
   student_id: '',
   email: '',
   gender: 'male',
-  birthday: ''
+  birthday: dayjs().format('YYYY-MM-DD')
 };
 
 const initialState = {
