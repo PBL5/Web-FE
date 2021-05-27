@@ -137,10 +137,10 @@ const SearchField = () => {
           value={
             filter_options.birthday === ''
               ? moment()
-              : moment(filter_options.birthday, dateFormat)
+              : moment(filter_options.birthday, 'YYYY-MM-DD')
           }
           onChange={(date, text) =>
-            handleChange({ target: { name: 'birthday', value: text } })
+            handleChange({ target: { name: 'birthday', value: moment(date).format('YYYY-MM-DD') } })
           }
         />
       </div>
