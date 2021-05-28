@@ -4,7 +4,8 @@ import {
   SET_ALL_CLASSES,
   SET_FILTER_OPTIONS,
   SET_STUDENTS_OF_CLASS,
-  DISABLE_DATE_FILTER
+  DISABLE_DATE_FILTER,
+  DISABLE_GENDER_FILTER
 } from 'src/types/students.type';
 
 const default_filter_options = {
@@ -19,7 +20,8 @@ const initialState = {
   classes: [],
   selectedClassID: 0,
   studentsOfClass: [],
-  disableDate: false,
+  disableDateValue: false,
+  disableGender: false,
   filterOptions: {
     class_id: 0,
     filter_options: default_filter_options
@@ -47,13 +49,17 @@ const studentReducer = (state = initialState, action) => {
           filter_options: { ...default_filter_options }
         }
       };
-      // case DISABLE_DATE_FILTER:
-      //   return {
-      //     ...state,
-      //     filterOptions: {
-      //       ...action.payload
-      //     }
-      //   };
+      case DISABLE_DATE_FILTER:
+        return {
+          ...state,
+          disableDateValue:  action.payload
+        };
+      case DISABLE_GENDER_FILTER:
+        return{
+          ...state,
+          disableGender: action.payload
+        }
+      
     default:
       return state;
   }

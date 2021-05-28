@@ -7,7 +7,7 @@ const SignIn = () => {
 
   const [signedIn, setSignedIn] = useState(false);
  
-  const {handleChange, dataSignIn, handleSignin, errors} = handleForm({validateInput})
+  const {handleChange, dataSignIn, handleSignin, errors, handleAddStudents} = handleForm({validateInput})
 
   if (signedIn) {
     window.location.href = '/';

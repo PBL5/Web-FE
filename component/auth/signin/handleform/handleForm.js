@@ -10,6 +10,10 @@ const handleForm = () =>{
     const [dataSignIn, setDataSignIn] = useState({
         email: '',
         password: '',
+        full_name: '',
+        gender: '',
+        dob: '',
+
     })
 
     const [errors, setErrors] = useState({
@@ -19,7 +23,6 @@ const handleForm = () =>{
     })
 
     const dispatch = useDispatch();
-    const history = useHistory();
     const router = useRouter();
 
     const handleChange = (e) => {
@@ -52,7 +55,7 @@ const handleForm = () =>{
         const payload = { ...dataSignIn };
         const result = await apiRequest(LOGIN_ENTRY_POINT, 'post', payload);
         dispatch(setUser(result.data));
-        router.push('/students/list');
+        router.push('/');
         }catch(error){
           setErrors({
             // emailError: 'Email is Incorrect',
@@ -63,7 +66,12 @@ const handleForm = () =>{
       }
         
       };
+
+      
+      const handleAddStudents = ()=>{
+
+      }
     
-    return {handleChange, dataSignIn, handleSignin, errors}
+    return {handleChange, dataSignIn, handleSignin, errors, handleAddStudents}
 }
 export default handleForm

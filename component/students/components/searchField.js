@@ -9,7 +9,8 @@ import {
   resetFilterOptions,
   setFilterOptions,
   setStudentOfClass,
-  disableDate
+  disableDateField,
+  disableGenderField
 } from 'src/actions/students.action';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import moment from 'moment';
@@ -18,6 +19,7 @@ import {
   POST,
   STUDENT_LIST_ENTRY_POINT
 } from 'src/utils/apiRequest';
+import { filter } from 'lodash';
 
 dayjs.extend(customParseFormat);
 
@@ -30,7 +32,6 @@ const SearchField = () => {
   const handleClear = () => {
     dispatch(resetFilterOptions());
   };
-
 
   const handleChange = (e) => {
     let { name, value } = e.target;
@@ -62,14 +63,26 @@ const SearchField = () => {
       console.log(err);
     }
   };
-  
-  // const handleSwitch = (checked) =>{
-  //   console.log('switch button', checked)
-  //   if(!checked){
-  //   dispatch(disableDate())
-  // }
-  // }
-  // console.log('bd',filter_options.birthday)
+
+  const handleSwitch = (checked) => {
+    console.log('switch button', checked);
+    if (!checked) {
+      dispatch(disableDateField(checked));
+    }
+  };
+  const { disableDateValue } = useSelector((state) => state.studentProps);
+  console.log('disable date', disableDateValue);
+
+  const disableDateChosen = (current) => {
+    return current && current > moment().endOf('day');
+  };
+
+  const handleSwitchGenderField = (choose) => {
+    if (!choose) {
+      dispatch(disableDateField(choose));
+    }
+  };
+  const { disableGender } = useSelector((state) => state.studentProps);
 
   return (
     <div className={inputSt.dropdownBody}>
@@ -119,13 +132,18 @@ const SearchField = () => {
       <div>
         <label htmlFor='gender' className={inputSt.formLabel}>
           Gender
+          <Switch
+            defaultChecked
+            onChange={handleSwitchGenderField}
+            style={{ marginLeft: 20 }}
+          />
         </label>
         <br />
         <Radio.Group
           name='gender'
           defaultValue={1}
           v-model='value'
-          value={filter_options.gender}
+          value={disableGender === false ? '' : filter_options.gender}
           onChange={handleChange}
         >
           <Radio value='male' key={1}>
@@ -138,20 +156,26 @@ const SearchField = () => {
       </div>
 
       <div>
-        <label className={inputSt.formLabel}>Date of birth 
-         <Switch defaultChecked   style = {{marginLeft: 20}}/>
-         </label>
+        <label className={inputSt.formLabel}>
+          Date of birth
+          <Switch
+            defaultChecked
+            onChange={handleSwitch}
+            style={{ marginLeft: 20 }}
+          />
+        </label>
         <br />
         <DatePicker
+          disabledDate={disableDateChosen}
           style={{ width: 200 }}
           id='date'
           name='date'
           format={dateFormat}
           value={
-            filter_options.birthday === ''
-              ? moment()
-              : moment(filter_options.birthday, 'YYYY-MM-DD')
-          }
+            disableDateValue 
+              ? moment(filter_options.birthday, 'YYYY-MM-DD')
+              : ''
+          } 
           onChange={(date, text) =>
             handleChange({
               target: {

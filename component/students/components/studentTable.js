@@ -39,7 +39,7 @@ const StudentsTable = () => {
   const pageCount = posts ? Math.ceil(posts.length / pagesize) : 0;
   console.log('page count', pageCount);
 
-  if (pageCount === 1) return null;
+  //if (pageCount === 1) return null;
   const pages = _.range(1, pageCount + 1);
 
   const pagination = (pageNo) => {

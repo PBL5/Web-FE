@@ -52,30 +52,51 @@ function Navbar() {
           <div className={styles.menuIcon} onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'}></i>
           </div>
-          <ul className={clsx(styles.navMenu, click && styles.active)}>
-            <li className={styles.navItems}>
-              <a href='/' className={styles.navLinks} onClick={closeMenu}>
-                Home
-              </a>
-            </li>
-            {authProps.isSignedIn ? (
-             <li className={styles.navItems}>
-             <NavDropdown className = {styles.navDropdown}
-              title={
-               <span className = {styles.navItemDropDown} >{authProps && authProps.user.full_name}</span>
-                 }
-               id="nav-dropdown"
-              >
-               <a
-                 href='/auth/signin'
-                 className= {styles.navLinksDropdown}
-                 onClick={handleSignout}
-               >
-                 Sign out
-               </a>
+
+          {authProps.isSignedIn ? (
+            <ul className={clsx(styles.navMenu, click && styles.active)}>
+              <li className={styles.navItems}>
+                <a href='/' className={styles.navLinks} onClick={closeMenu}>
+                  Home
+                </a>
+              </li>
+              <li className={styles.navItems}>
+                <a href='/students/list' className={styles.navLinks}>
+                  Students List
+                </a>
+              </li>
+              <li className={styles.navItems}>
+                <a href='/students/add' className={styles.navLinks}>
+                  Add Students
+                </a>
+              </li>
+              <li className={styles.navItems}>
+                <NavDropdown
+                  className={styles.navDropdown}
+                  title={
+                    <span className={styles.navItemDropDown}>
+                      {authProps && authProps.user.full_name}
+                    </span>
+                  }
+                  id='nav-dropdown'
+                >
+                  <a
+                    href='/auth/signin'
+                    className={styles.navLinksDropdown}
+                    onClick={handleSignout}
+                  >
+                    Sign out
+                  </a>
                 </NavDropdown>
               </li>
-            ) : (
+            </ul>
+          ) : (
+            <ul className={clsx(styles.navMenu, click && styles.active)}>
+              <li className={styles.navItems}>
+                <a href='/' className={styles.navLinks} onClick={closeMenu}>
+                  Home
+                </a>
+              </li>
               <li className={styles.navItems}>
                 <a
                   href='/auth/signin'
@@ -85,8 +106,8 @@ function Navbar() {
                   Sign in
                 </a>
               </li>
-            )}
-          </ul>
+            </ul>
+          )}
         </div>
       </nav>
     </>
