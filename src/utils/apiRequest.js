@@ -15,3 +15,4 @@ export const GET = 'get';
 export const LOGIN_ENTRY_POINT = '/login';
 export const STUDENT_LIST_ENTRY_POINT = '/students';
 export const ALL_CLASSES_ENTRY_POINT = '/classes';
+export const ADD_STUDENT_ENTRY_POINT = '/student/add';

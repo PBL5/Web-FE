@@ -3,10 +3,11 @@ export default function validateInput(dataSignIn) {
 
     let errors = {}
 
-//[0-9]+@[a-zA-Z]+\.[a-zA-Z] + \.[a-zA-Z]; [a-zA-Z0-9]+@sv\.dut\.vn; ~^[a-zA-Z_-]+@gmail\.co\.uk$~
+    const regex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
     if(!dataSignIn.email){
         errors.emailError = 'Email required'
-    }else if(!/^[0-9]@(dut)\.(udn)\.(vn)+$/.test(dataSignIn.email)){
+    }else if(!regex.test(dataSignIn.email)){
        errors.emailError = 'Email address is invalid'
     }
 

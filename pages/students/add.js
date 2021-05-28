@@ -1,8 +1,16 @@
-import React from 'react'
-import AddStudentsPage from 'component/students/add/addStudentsPage'
+import React from 'react';
+import AddStudents from 'component/addStudent';
+import { useSelector } from 'react-redux';
+import Loading from 'component/common/loading';
 
 const StudentAddPage = () => {
-    return <AddStudentsPage />
-}
+  const { isLoading } = useSelector((state) => state.commonProps);
+  return (
+    <>
+      <AddStudents />
+      {isLoading && <Loading />}
+    </>
+  );
+};
 
-export default StudentAddPage
+export default StudentAddPage;

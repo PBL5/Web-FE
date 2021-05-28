@@ -1,4 +1,4 @@
-import StudentsList from 'component/students';
+import StudentsList from 'component/studentsList';
 import React from 'react';
 import { ALL_CLASSES_ENTRY_POINT, apiRequest, GET } from 'src/utils/apiRequest';
 import { wrapper } from 'src/store';

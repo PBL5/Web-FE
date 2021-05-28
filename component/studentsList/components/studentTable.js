@@ -8,11 +8,8 @@ const pagesize = 5;
 const StudentsTable = () => {
   const { studentsOfClass } = useSelector((state) => state.studentProps);
 
-  console.log('students of class', studentsOfClass);
-
   const [posts, setPosts] = useState();
   const pagi = _(studentsOfClass).slice(0).take(pagesize).value();
-  console.log('pagi', pagi);
   const [paginatedPosts, setPaginatedPosts] = useState(pagi);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -22,10 +19,6 @@ const StudentsTable = () => {
   }, [studentsOfClass]);
 
   const columns = paginatedPosts[0] && Object.keys(paginatedPosts[0]);
-
-  console.log('pagination posts', paginatedPosts);
-  console.log('posts', posts);
-  console.log('cols', columns);
 
   const labelCols = [
     'Student ID',
@@ -37,7 +30,6 @@ const StudentsTable = () => {
   ];
 
   const pageCount = posts ? Math.ceil(posts.length / pagesize) : 0;
-  console.log('page count', pageCount);
 
   //if (pageCount === 1) return null;
   const pages = _.range(1, pageCount + 1);
@@ -47,10 +39,6 @@ const StudentsTable = () => {
     const startIndex = (pageNo - 1) * pagesize;
     const paginatedPost = _(posts).slice(startIndex).take(pagesize).value();
     setPaginatedPosts(paginatedPost);
-    console.log('pageNo', pageNo);
-    console.log('start index', startIndex);
-    console.log('set pagi', paginatedPosts);
-    console.log('current page', currentPage)
   };
 
   return (

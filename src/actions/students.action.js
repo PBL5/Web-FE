@@ -1,11 +1,10 @@
 import {
-  DISABLE_DATE_FILTER,
-  DISABLE_GENDER_FILTER,
   RESET_FILTER_OPTIONS,
   SET_ALL_CLASSES,
   SET_FILTER_OPTIONS,
-  SET_STUDENTS_OF_CLASS, 
-  ADD_STUDENTS
+  SET_STUDENTS_OF_CLASS,
+  SET_DISABLE_DATE_FIELD,
+  SET_DISABLE_GENDER_FIELD
 } from 'src/types/students.type';
 
 export const setAllClasses = (classes) => {
@@ -33,22 +32,15 @@ export const resetFilterOptions = () => {
   return { type: RESET_FILTER_OPTIONS };
 };
 
-export const disableDateField = (checked) =>{
+export const setDisableDateField = (checked) => {
   return {
-    type: DISABLE_DATE_FILTER,
-    payload: checked
-  }
-}
-export const disableGenderField = (choose)=>{
-  return{
-    type: DISABLE_GENDER_FILTER,
-    payload: choose
-  }
-}
-
-// export const addStudents = (student) =>{
-//   return{
-//     type: ADD_STUDENTS,
-//     payload: student
-//   }
-// }
+    type: SET_DISABLE_DATE_FIELD,
+    payload: !checked
+  };
+};
+export const setDisableGenderField = (checked) => {
+  return {
+    type: SET_DISABLE_GENDER_FIELD,
+    payload: !checked
+  };
+};

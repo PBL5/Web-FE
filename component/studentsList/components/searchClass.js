@@ -18,13 +18,13 @@ import {
 } from 'src/utils/apiRequest';
 
 const SearchClass = () => {
-
   const {
     classes,
-    filterOptions: { class_id, filter_options }
+    filterOptions: { class_id, filter_options },
+    disableDateField,
+    disableGenderField
   } = useSelector((state) => state.studentProps);
   const dispatch = useDispatch();
-
 
   /*
    * Get students base on filter options and save to store
@@ -34,16 +34,19 @@ const SearchClass = () => {
   const handleGetStudentOfClass = async () => {
     try {
       const filterOptionPayload = { class_id, filter_options: {} };
-      for (const [key, value] of Object.entries(filter_options))
-        if (value !== '') filterOptionPayload.filter_options[key] = value;
+      for (const [key, value] of Object.entries(filter_options)) {
+        if (key === 'birthday' && disableDateField) continue;
+        if (key === 'gender' && disableGenderField) continue;
 
-      console.log(filter_options)
+        if (value !== '') filterOptionPayload.filter_options[key] = value;
+      }
+
+      console.log('filterOptionPayload', filterOptionPayload);
       const response = await apiRequest(
         STUDENT_LIST_ENTRY_POINT,
         POST,
         filterOptionPayload
       );
-      console.log(response.data);
 
       dispatch(setStudentOfClass(response.data));
     } catch (err) {

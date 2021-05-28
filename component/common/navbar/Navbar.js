@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { NavDropdown } from 'react-bootstrap';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { logout } from 'src/actions/auth.action';
+import Link from 'next/link';
 
 import styles from './Navbar.module.css';
 
@@ -61,9 +62,9 @@ function Navbar() {
                 </a>
               </li>
               <li className={styles.navItems}>
-                <a href='/students/list' className={styles.navLinks}>
-                  Students List
-                </a>
+                <Link href='/students/list'>
+                  <a className={styles.navLinks}>Students List</a>
+                </Link>
               </li>
               <li className={styles.navItems}>
                 <a href='/students/add' className={styles.navLinks}>

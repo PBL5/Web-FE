@@ -5,6 +5,7 @@ import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import studentReducer from 'src/reducers/student.reducer';
 import { getCookie } from 'src/utils/cookies';
+import commonReducer from 'src/reducers/common.reducer';
 
 const reducers = (state, action) => {
   const defaultState = {
@@ -26,7 +27,8 @@ const reducers = (state, action) => {
     return { ...action.payload, authProps: { ...initialState } };
   return combineReducers({
     authProps: authReducer,
-    studentProps: studentReducer
+    studentProps: studentReducer,
+    commonProps: commonReducer
   })(state, action);
 };
 
