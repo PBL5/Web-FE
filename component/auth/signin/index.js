@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './index.module.css';
-import validateInput from './handleForm/validateInput';
-import handleForm from './handleForm/handleForm';
+import validateInput from './handleform/validateInput';
+import handleForm from './handleform/handleForm';
 
 const SignIn = () => {
 

@@ -78,7 +78,7 @@ function Navbar() {
                       {authProps && authProps.user.full_name}
                     </span>
                   }
-                  id='nav-dropdown'
+                  // id='nav-dropdown'
                 >
                   <a
                     href='/auth/signin'

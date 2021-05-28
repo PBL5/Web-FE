@@ -4,7 +4,8 @@ import {
   RESET_FILTER_OPTIONS,
   SET_ALL_CLASSES,
   SET_FILTER_OPTIONS,
-  SET_STUDENTS_OF_CLASS
+  SET_STUDENTS_OF_CLASS, 
+  ADD_STUDENTS
 } from 'src/types/students.type';
 
 export const setAllClasses = (classes) => {
@@ -44,3 +45,10 @@ export const disableGenderField = (choose)=>{
     payload: choose
   }
 }
+
+// export const addStudents = (student) =>{
+//   return{
+//     type: ADD_STUDENTS,
+//     payload: student
+//   }
+// }

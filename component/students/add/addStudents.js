@@ -5,6 +5,7 @@ import handleForm from 'component/auth/signin/handleform/handleForm'
 import {Radio, DatePicker} from 'antd'
 import moment from 'moment'
 import 'antd/dist/antd.css';
+import dayjs from 'dayjs';
 
 const AddStudents = () => {
 
@@ -77,20 +78,12 @@ const AddStudents = () => {
         </label>
         <br/>
         <DatePicker
-          disabledDate={disableDateChosen}
           style={{ width: 200 }}
-          id='date'
-          name='date'
+          id='dob'
+          name='dob'
           format= 'DD-MM-YYYY'
           value = {dataSignIn.dob}
-          onChange={(date, text) =>
-            handleChange({
-              target: {
-                name: 'birthday',
-                value: moment(date).format('YYYY-MM-DD')
-              }
-            })
-          }
+            onChange = {handleChange}
         />
         {errors.dobError && <p>{errors.dobError}</p>}
         </div>

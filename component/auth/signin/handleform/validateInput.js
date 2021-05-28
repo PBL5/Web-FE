@@ -20,8 +20,8 @@ export default function validateInput(dataSignIn) {
        errors.genderError = 'Empty gender'
    }
 
-    if(!dataSignIn.dob){
-        errors.dobErrors = 'Empty date of birth'
+    if(dataSignIn.dob === ''){
+        errors.dobError = 'Empty date of birth'
     }
 
     if(!dataSignIn.full_name){

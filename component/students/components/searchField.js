@@ -166,7 +166,7 @@ const SearchField = () => {
         </label>
         <br />
         <DatePicker
-          disabledDate={disableDateChosen}
+          // disabledDate={disableDateChosen}
           style={{ width: 200 }}
           id='date'
           name='date'

@@ -2,7 +2,7 @@ import {useState} from 'react'
 import { apiRequest, GET, LOGIN_ENTRY_POINT, POST } from 'src/utils/apiRequest';
 import { useDispatch } from 'react-redux';
 import { setUser } from 'src/actions/auth.action';
-import { useHistory } from 'react-router';
+// import { addStudents } from 'src/actions/students.action';
 import validateInput from './validateInput';
 import {useRouter} from 'next/router'
 
@@ -70,13 +70,19 @@ const handleForm = () =>{
         
       };
 
+      const handleAddChange = (e) =>{
+          let { name, value } = e.target;
+      
+          // dispatch(addStudents());
+        };
+      
 
       const handleAddStudents = (e)=>{
         e.preventDefault();
         setErrors(validateInput(dataSignIn))
         
-        console.log('dob error', dataSignIn.dobError)
-        console.log('password', dataSignIn.password)
+        console.log('dob error', errors.dobError)
+        console.log(dataSignIn.dob)
       }
     
     return {handleChange, dataSignIn, handleSignin, errors, handleAddStudents}
