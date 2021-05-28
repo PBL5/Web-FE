@@ -17,6 +17,9 @@ const AddStudents = () => {
       const handleClear=() =>{
 
       }
+      const FakeNoti = ()=>{
+        alert('Saved')
+      }
   return (
     <div className={styles.formContent}>
       <div className={styles.form}>
@@ -82,10 +85,11 @@ const AddStudents = () => {
           id='dob'
           name='dob'
           format= 'DD-MM-YYYY'
+        //   value = '01/01/2021'
           value = {dataSignIn.dob}
-            onChange = {handleChange}
+        //     onChange = {handleChange}
         />
-        {errors.dobError && <p>{errors.dobError}</p>}
+        {/* {errors.dobError && <p>{errors.dobError}</p>} */}
         </div>
         <div className={styles.formInputs}>
           <label htmlFor='password' className={styles.formLabel}>
@@ -107,7 +111,7 @@ const AddStudents = () => {
           <div className = {styles.btn}>
         <button
           className={styles.formInputBtn}
-          onClick={handleAddStudents}
+          onClick={FakeNoti}
         >
           Save
         </button>
