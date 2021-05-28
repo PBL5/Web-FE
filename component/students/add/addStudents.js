@@ -32,6 +32,7 @@ const AddStudents = () => {
             value={dataSignIn.full_name}
             onChange={handleChange}
           />
+          {errors.fullnameError && <p>{errors.fullnameError}</p>}
         </div>
         <div className={styles.formInputs}>
           <label htmlFor='email' className={styles.formLabel}>
@@ -68,6 +69,7 @@ const AddStudents = () => {
             Female
           </Radio>
         </Radio.Group>
+        {errors.genderError && <p>{errors.genderError}</p>}
         </div>
         <div  className={styles.formInputs} >
         <label htmlFor='date' className={styles.formLabel}>
@@ -90,6 +92,7 @@ const AddStudents = () => {
             })
           }
         />
+        {errors.dobError && <p>{errors.dobError}</p>}
         </div>
         <div className={styles.formInputs}>
           <label htmlFor='password' className={styles.formLabel}>
@@ -105,7 +108,7 @@ const AddStudents = () => {
             onChange={handleChange}
           />
           {errors.passwordError && <p>{errors.passwordError}</p>}
-          {errors.both && <p>{errors.both}</p>}
+        
         </div>
 
           <div className = {styles.btn}>

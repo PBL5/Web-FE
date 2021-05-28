@@ -20,6 +20,9 @@ const handleForm = () =>{
       emailError: '',
       passwordError: '',
       both: '',
+      genderError: '',
+      dobError: '',
+      fullnameError: ''
     })
 
     const dispatch = useDispatch();
@@ -67,9 +70,13 @@ const handleForm = () =>{
         
       };
 
-      
-      const handleAddStudents = ()=>{
 
+      const handleAddStudents = (e)=>{
+        e.preventDefault();
+        setErrors(validateInput(dataSignIn))
+        
+        console.log('dob error', dataSignIn.dobError)
+        console.log('password', dataSignIn.password)
       }
     
     return {handleChange, dataSignIn, handleSignin, errors, handleAddStudents}
