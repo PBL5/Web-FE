@@ -1,5 +1,5 @@
 import React from 'react';
-import { DatePicker, Radio } from 'antd';
+import { DatePicker, Radio, Switch } from 'antd';
 import 'antd/dist/antd.css';
 import inputSt from './customInput.module.css';
 import clsx from 'clsx';
@@ -7,7 +7,9 @@ import dayjs from 'dayjs';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   resetFilterOptions,
-  setFilterOptions
+  setFilterOptions,
+  setStudentOfClass,
+  disableDate
 } from 'src/actions/students.action';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import moment from 'moment';
@@ -29,6 +31,7 @@ const SearchField = () => {
     dispatch(resetFilterOptions());
   };
 
+
   const handleChange = (e) => {
     let { name, value } = e.target;
 
@@ -45,8 +48,7 @@ const SearchField = () => {
     try {
       let filterOptionPayload = { class_id, filter_options: {} };
       for (const [key, value] of Object.entries(filter_options)) {
-        if (value !== '')
-          filterOptionPayload.filter_options[key] = value;
+        if (value !== '') filterOptionPayload.filter_options[key] = value;
       }
 
       const response = await apiRequest(
@@ -54,11 +56,20 @@ const SearchField = () => {
         POST,
         filterOptionPayload
       );
-      console.log(response.data)
+      console.log(response.data);
+      dispatch(setStudentOfClass(response.data));
     } catch (err) {
       console.log(err);
     }
   };
+  
+  // const handleSwitch = (checked) =>{
+  //   console.log('switch button', checked)
+  //   if(!checked){
+  //   dispatch(disableDate())
+  // }
+  // }
+  // console.log('bd',filter_options.birthday)
 
   return (
     <div className={inputSt.dropdownBody}>
@@ -127,7 +138,9 @@ const SearchField = () => {
       </div>
 
       <div>
-        <label className={inputSt.formLabel}>Date of birth</label>
+        <label className={inputSt.formLabel}>Date of birth 
+         <Switch defaultChecked   style = {{marginLeft: 20}}/>
+         </label>
         <br />
         <DatePicker
           style={{ width: 200 }}
@@ -140,7 +153,12 @@ const SearchField = () => {
               : moment(filter_options.birthday, 'YYYY-MM-DD')
           }
           onChange={(date, text) =>
-            handleChange({ target: { name: 'birthday', value: moment(date).format('YYYY-MM-DD') } })
+            handleChange({
+              target: {
+                name: 'birthday',
+                value: moment(date).format('YYYY-MM-DD')
+              }
+            })
           }
         />
       </div>

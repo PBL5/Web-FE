@@ -1,4 +1,5 @@
 import {
+  DISABLE_DATE_FILTER,
   RESET_FILTER_OPTIONS,
   SET_ALL_CLASSES,
   SET_FILTER_OPTIONS,
@@ -29,3 +30,10 @@ export const setFilterOptions = (filterOptions) => {
 export const resetFilterOptions = () => {
   return { type: RESET_FILTER_OPTIONS };
 };
+
+// export const disableDate = (filterOptions) =>{
+//   return {
+//     type: DISABLE_DATE_FILTER,
+//     payload: filterOptions
+//   }
+// }

@@ -4,15 +4,16 @@ const StudentsTable = ({ students }) => {
 
 
   const columns = students[0] && Object.keys(students[0]);
+  
   return (
     <>
       <table cellPadding={0} cellSpacing={0}>
-        <thread>
+        <thead>
           <tr>
             {students[0] &&
               columns.map((label, index) => <th key={index}>{label}</th>)}
           </tr>
-        </thread>
+        </thead>
         <tbody>
           {students.map((row, index) => (
             <tr key={index}>

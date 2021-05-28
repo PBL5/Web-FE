@@ -18,22 +18,13 @@ import {
 } from 'src/utils/apiRequest';
 
 const SearchClass = () => {
+
   const {
     classes,
     filterOptions: { class_id, filter_options }
   } = useSelector((state) => state.studentProps);
   const dispatch = useDispatch();
 
-  const [dropdownVisible, setDropdownVisible] = useState(false);
-
-  const handleHide = () => {
-    setDropdownVisible((prev) => ({ dropdownVisible: !prev.dropdownVisible }));
-  };
-
-  const handleBlur = (e) => {
-    console.log('on blur');
-    setDropdownVisible((prev) => ({ dropdownVisible: !prev.dropdownVisible }));
-  };
 
   /*
    * Get students base on filter options and save to store
@@ -46,6 +37,7 @@ const SearchClass = () => {
       for (const [key, value] of Object.entries(filter_options))
         if (value !== '') filterOptionPayload.filter_options[key] = value;
 
+      console.log(filter_options)
       const response = await apiRequest(
         STUDENT_LIST_ENTRY_POINT,
         POST,
@@ -89,30 +81,3 @@ const SearchClass = () => {
 };
 
 export default SearchClass;
-
-{
-  /*
-      <div className={style.dropdownContainer}>
-        <div className={style.dropdownTrigger}>
-          <i
-            className={clsx(styles.searchIcon, 'fas fa-search')}
-            onClick={handleHide}
-          ></i>
-        </div>
-         {
-        dropdownVisible && <SearchFieldComp /> 
-        } */
-}
-{
-  /* <div className = {styles.selectContent}>
-     <div className = {styles.selectItems}>
-        <p className = {styles.selectClass}>Select class</p>
-        <select className = {styles.selectOption} >
-          {classes.map((element, key) => (
-              <option  key={key}>{element.subject.subject_name}</option>
-            ))}
-        </select>
-        <button className = {styles.showButton} onClick={handleGetStudentOfClass}>Show</button>
-        </div>
-      </div> */
-}
