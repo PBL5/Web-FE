@@ -6,23 +6,27 @@ import 'antd/dist/antd.css';
 import clsx from 'clsx';
 import style from './dropdown.module.css';
 // import inputSt from './customInput.module.css';
-import SearchFieldComp from './SearchFieldComp';
 import {
   setFilterOptions,
   setStudentOfClass
 } from 'src/actions/students.action';
 import {
   apiRequest,
+  CALL_ROLL_ENTRY_POINT,
+  CHECK_ATTENDANCE_ENTRY_POINT,
+  GET,
   POST,
   STUDENT_LIST_ENTRY_POINT
 } from 'src/utils/apiRequest';
+import { setIsLoading } from 'src/actions/common.action';
 
 const SearchClass = () => {
   const {
     classes,
     filterOptions: { class_id, filter_options },
     disableDateField,
-    disableGenderField
+    disableGenderField,
+    studentsOfClass
   } = useSelector((state) => state.studentProps);
   const dispatch = useDispatch();
 
@@ -63,22 +67,59 @@ const SearchClass = () => {
     );
   };
 
+  const handleCallingRoll = async () => {
+    dispatch(setIsLoading(true));
+    await apiRequest(CALL_ROLL_ENTRY_POINT, GET, {}, { class_id });
+    dispatch(setIsLoading(false));
+  };
+
+  const handleCheckAttendance = async () => {
+    dispatch(setIsLoading(true));
+    const response = await apiRequest(
+      CHECK_ATTENDANCE_ENTRY_POINT,
+      GET,
+      {},
+      { class_id }
+    );
+    const studentAttendances = response.data;
+
+    const newStudentOfClass = studentsOfClass.map((element) => {
+      const result = studentAttendances.find(
+        (e) => e.user_id === element.user_id
+      );
+      if (result) return { ...result, isAttending: true };
+      return { ...element, isAttending: false };
+    });
+
+    dispatch(setStudentOfClass(newStudentOfClass));
+
+    dispatch(setIsLoading(false));
+  };
+
   const { Option } = Select;
   return (
-    <div>
-      <Select
-        labelInValue
-        defaultValue={{ value: 'Choose Class' }}
-        style={{ width: 170 }}
-        onSelect={handleSelectClass}
-      >
-        {classes.map((element, key) => (
-          <Option key={key}>{element.subject.subject_name}</Option>
-        ))}
-      </Select>
-      <Button style={{ marginLeft: 10 }} onClick={handleGetStudentOfClass}>
-        Show
-      </Button>
+    <div className={styles.root}>
+      <div className={styles.wrapSearchClass}>
+        <Select
+          labelInValue
+          defaultValue={{ value: 'Choose Class' }}
+          style={{ width: 170 }}
+          onSelect={handleSelectClass}
+        >
+          {classes.map((element, key) => (
+            <Option key={key}>{element.subject.subject_name}</Option>
+          ))}
+        </Select>
+        <Button style={{ marginLeft: 10 }} onClick={handleGetStudentOfClass}>
+          Show
+        </Button>
+      </div>
+      <div className={styles.wrapStartBtn}>
+        <Button style={{ marginLeft: 10 }} onClick={handleCallingRoll}>
+          Start calling the roll
+        </Button>
+        <Button onClick={handleCheckAttendance}>Check attendances</Button>
+      </div>
     </div>
   );
 };

@@ -1,8 +1,25 @@
 @import 'https://fonts.googleapis.com/css?family=Roboto+Mono:300,700';
 
+.root {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 0px 10px;
+}
 
+.wrapSearchClass {
+  display: flex;
+  width: 50%;
+  justify-content: flex-start;
+}
 
-.selectContent{
+.wrapStartBtn {
+  display: flex;
+  width: 50%;
+  justify-content: flex-end;
+}
+
+.selectContent {
   height: 100%;
   max-height: 100%;
   width: 100%;
@@ -18,83 +35,82 @@
   left: 31%;
 }
 
-.selectItems{
-
-/* display: flex;
+.selectItems {
+  /* display: flex;
 flex-direction: column;
 justify-content: center; */
-/* align-items: flex-start; */
-height: 200px;
-padding: 2rem 2rem;
-width: 100%;
-/* margin-left: 24rem; */
-margin-top: -2rem;
-color: #fff;
-line-height: 1;
-font-weight: bold;
-justify-content: center;
+  /* align-items: flex-start; */
+  height: 200px;
+  padding: 2rem 2rem;
+  width: 100%;
+  /* margin-left: 24rem; */
+  margin-top: -2rem;
+  color: #fff;
+  line-height: 1;
+  font-weight: bold;
+  justify-content: center;
 }
 
-.selectOption{
+.selectOption {
   position: absolute;
   top: 27%;
   left: 32%;
-	padding: .6em 1.4em .5em .8em;
-	width: 220px;
-	box-sizing: border-box;
-	margin: 0;
-	border: 1px solid #aaa;
-	box-shadow: 0 2px 0 2px rgba(0,0,0,.04);
-	border-radius: 2px;
-	background-color: #fff;
-  letter-spacing: .5px;
+  padding: 0.6em 1.4em 0.5em 0.8em;
+  width: 220px;
+  box-sizing: border-box;
+  margin: 0;
+  border: 1px solid #aaa;
+  box-shadow: 0 2px 0 2px rgba(0, 0, 0, 0.04);
+  border-radius: 2px;
+  background-color: #fff;
+  letter-spacing: 0.5px;
   font-family: 'Roboto', sans-serif;
   /* font-weight: 600; */
   cursor: pointer;
   font-size: 18px;
 }
 
-.selectOption:hover{
+.selectOption:hover {
   border-color: rgba(127, 17, 190, 0.8);
-
 }
 
-.selectOption:focus{
+.selectOption:focus {
   border-color: rgba(127, 17, 190, 0.8);
-	color: #222; 
-	outline: none;
-  transition: all .5s ease-in ;
+  color: #222;
+  outline: none;
+  transition: all 0.5s ease-in;
 }
 
-.selectOption option:hover{
-  transition: background-color .5s ease-in;
+.selectOption option:hover {
+  transition: background-color 0.5s ease-in;
   background-color: rgb(113, 170, 228);
 }
 
-.showButton{
-margin-left: 10px;
-font-size: 16px;
-padding: 4px 6px;
-/* border: 2px solid rgb(255,130,130); */
-border-radius: 4px;
-background: rgba(254, 225, 255, 0);
-color: #000;
-transition: 0.2s ease-out;
-/* font-weight: 600; */
-font-family: 'Roboto', sans-serif;
-border-width: 2px;
-border-style: solid;
-border-color: transparent transparent rgb(162, 0, 255) transparent;
+.showButton {
+  margin-left: 10px;
+  font-size: 16px;
+  padding: 4px 6px;
+  /* border: 2px solid rgb(255,130,130); */
+  border-radius: 4px;
+  background: rgba(254, 225, 255, 0);
+  color: #000;
+  transition: 0.2s ease-out;
+  /* font-weight: 600; */
+  font-family: 'Roboto', sans-serif;
+  border-width: 2px;
+  border-style: solid;
+  border-color: transparent transparent rgb(162, 0, 255) transparent;
 }
 
-.showButton:hover{
+.showButton:hover {
   transition: 0.2s ease-out;
   cursor: pointer;
   color: #fff;
-  border-color: rgb(162, 0, 255) rgb(162, 0, 255) rgb(162, 0, 255) rgb(162, 0, 255) ;
+  border-color: rgb(162, 0, 255) rgb(162, 0, 255) rgb(162, 0, 255)
+    rgb(162, 0, 255);
 }
 
- .textp{
+.textp {
   font-size: 16px;
   margin-bottom: 1.5rem;
   font-family: 'Roboto', sans-serif;
@@ -107,27 +123,26 @@ border-color: transparent transparent rgb(162, 0, 255) transparent;
 }
 
 @media screen and (max-width: 960px) {
-.selectOption{
-  left: 20%;
+  .selectOption {
+    left: 20%;
+  }
+
+  .showButton {
+    left: 50%;
+  }
+  .selectClass {
+    left: 20%;
+  }
 }
 
-.showButton{
-  left: 50%;
-}
-.selectClass{
-  left: 20%;
-}
-
-}
-
-.searchIcon{
+.searchIcon {
   margin-left: 20px;
   font-size: 16px;
   cursor: pointer;
 }
 
-.searchIcon:hover{
+.searchIcon:hover {
   color: #222;
   font-size: 18px;
-
 }
+

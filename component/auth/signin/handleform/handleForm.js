@@ -32,6 +32,8 @@ const handleForm = () => {
     fullnameError: ''
   });
 
+  const [openSuccessfulDialog, setOpenSuccessulDialog] = useState(false);
+
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -89,6 +91,7 @@ const handleForm = () => {
       await apiRequest(ADD_STUDENT_ENTRY_POINT, POST, payload);
     }
     dispatch(setIsLoading(false));
+    setOpenSuccessulDialog(true);
   };
 
   const handleClear = (e) => {
@@ -101,7 +104,9 @@ const handleForm = () => {
     handleSignin,
     errors,
     handleAddStudents,
-    handleClear
+    handleClear,
+    setOpenSuccessulDialog,
+    openSuccessfulDialog
   };
 };
 export default handleForm;

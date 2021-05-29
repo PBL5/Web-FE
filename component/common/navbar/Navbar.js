@@ -71,6 +71,7 @@ function Navbar() {
                   Add Students
                 </a>
               </li>
+
               <li className={styles.navItems}>
                 <NavDropdown
                   className={styles.navDropdown}

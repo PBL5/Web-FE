@@ -5,14 +5,18 @@ import handleForm from 'component/auth/signin/handleform/handleForm';
 import { Radio, DatePicker } from 'antd';
 import moment from 'moment';
 import 'antd/dist/antd.css';
-import dayjs from 'dayjs';
+import Dialog from 'component/common/dialog';
 
 const AddStudents = () => {
-  const { handleChange, dataSignIn, errors, handleAddStudents, handleClear } =
-    handleForm({ validateInput });
-  const disableDateChosen = (current) => {
-    return current && current > moment().endOf('day');
-  };
+  const {
+    handleChange,
+    dataSignIn,
+    errors,
+    handleAddStudents,
+    handleClear,
+    openSuccessfulDialog,
+    setOpenSuccessulDialog
+  } = handleForm({ validateInput });
 
   return (
     <div className={styles.formContent}>
@@ -111,7 +115,6 @@ const AddStudents = () => {
           />
           {errors.passwordError && <p>{errors.passwordError}</p>}
         </div>
-
         <div className={styles.btn}>
           <button className={styles.formInputBtn} onClick={handleAddStudents}>
             Save
@@ -122,6 +125,25 @@ const AddStudents = () => {
           </button>
         </div>
       </div>
+      {openSuccessfulDialog && (
+        <Dialog>
+          <div className={styles.dialogRoot}>
+            <div>
+              <label className={styles.dialogLabel}>
+                Add student successfully
+              </label>
+            </div>
+            <div>
+              <button
+                className={styles.dialogButton}
+                onClick={() => setOpenSuccessulDialog(false)}
+              >
+                OK
+              </button>
+            </div>
+          </div>
+        </Dialog>
+      )}
     </div>
   );
 };

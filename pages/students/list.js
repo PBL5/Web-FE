@@ -3,9 +3,17 @@ import React from 'react';
 import { ALL_CLASSES_ENTRY_POINT, apiRequest, GET } from 'src/utils/apiRequest';
 import { wrapper } from 'src/store';
 import { setAllClasses } from 'src/actions/students.action';
+import { useSelector } from 'react-redux';
+import Loading from 'component/common/loading';
 
 const StudentsListPage = () => {
-  return <StudentsList />;
+  const { isLoading } = useSelector((state) => state.commonProps);
+  return (
+    <>
+      <StudentsList />
+      {isLoading && <Loading />}
+    </>
+  );
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(

@@ -1,0 +1,14 @@
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 1999;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: #8e8591;
+  opacity: 0.7
+}

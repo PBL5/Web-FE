@@ -26,7 +26,8 @@ const StudentsTable = () => {
     'Email',
     'Role',
     'Gender',
-    'Date of birth'
+    'Date of birth',
+    'Is attendant'
   ];
 
   const pageCount = posts ? Math.ceil(posts.length / pagesize) : 0;
@@ -40,6 +41,7 @@ const StudentsTable = () => {
     const paginatedPost = _(posts).slice(startIndex).take(pagesize).value();
     setPaginatedPosts(paginatedPost);
   };
+  console.log(columns);
 
   return (
     <div className={styles.studentslist}>
@@ -59,7 +61,7 @@ const StudentsTable = () => {
             <tr key={index}>
               {columns.map((cols, index) => (
                 <td className={styles.td} key={index}>
-                  {row[cols]}
+                  {cols === 'isAttending' ? row[cols] && 'OK' : row[cols]}
                 </td>
               ))}
             </tr>
@@ -70,12 +72,11 @@ const StudentsTable = () => {
         <ul className={styles.paginationContainer}>
           {/* <p>prev</p> */}
           {pages.map((page, key) => (
-            <li
-              key={key}
-              className = {styles.paginationNumber}
-              
-            >
-              <p  className = {styles.paginationNumber} onClick={() => pagination(page)}>
+            <li key={key} className={styles.paginationNumber}>
+              <p
+                className={styles.paginationNumber}
+                onClick={() => pagination(page)}
+              >
                 {page}
               </p>
             </li>

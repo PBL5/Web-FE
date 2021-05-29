@@ -1,0 +1,31 @@
+.root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapCmp {
+  background-color: #fff;
+  padding: 30px 40px;
+  border-radius: 10px;
+}
+
+.title {
+  margin-top: 16px;
+  display: inline-block;
+  font-size: 24px;
+  margin-bottom: 8px;
+  color: black;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+.input {
+  display: block;
+  padding-left: 10px;
+  outline: none;
+  border-radius: 4px;
+  height: 40px;
+  width: 100%;
+  border: 1px solid rgb(89, 128, 255);
+}
