@@ -1,18 +1,47 @@
+import { Modal, Button } from 'antd';
 import React, { useState } from 'react';
+import { apiRequest, LOGIN_ENTRY_POINT, POST } from 'src/utils/apiRequest';
+import 'antd/dist/antd.css';
 import styles from './index.module.css';
-import validateInput from './handleform/validateInput';
-import handleForm from './handleform/handleForm';
+import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/router';
+import { setUser } from 'src/actions/auth.action';
+import validateInput from 'src/validateInput';
 
 const SignIn = () => {
+  const [dataSignIn, setDataSignIn] = useState({
+    email: '',
+    password: ''
+  });
+  const [errors, setErrors] = useState({
+    emailError: '',
+    passwordError: ''
+  });
+  const [dialogMessage, setDialogMessage] = useState('');
 
-  const [signedIn, setSignedIn] = useState(false);
- 
-  const {handleChange, dataSignIn, handleSignin, errors, handleAddStudents} = handleForm({validateInput})
+  const dispatch = useDispatch();
+  const router = useRouter();
 
-  if (signedIn) {
-    window.location.href = '/';
-    return;
-  }
+  const handleChange = ({ target: { name, value } }) => {
+    setDataSignIn({ ...dataSignIn, [name]: value });
+  };
+
+  const handleSignin = async (e) => {
+    e.preventDefault();
+
+    const validateResult = validateInput(dataSignIn, ['email', 'password']);
+    setErrors(validateResult);
+
+    if (Object.keys(validateResult).length > 0) return;
+
+    try {
+      const result = await apiRequest(LOGIN_ENTRY_POINT, POST, dataSignIn);
+      dispatch(setUser(result.data));
+      router.push('/');
+    } catch (err) {
+      setDialogMessage(err.response.data);
+    }
+  };
 
   return (
     <div className={styles.formContent}>
@@ -47,7 +76,6 @@ const SignIn = () => {
             onChange={handleChange}
           />
           {errors.passwordError && <p>{errors.passwordError}</p>}
-          {errors.both && <p>{errors.both}</p>}
         </div>
 
         <button
@@ -58,14 +86,21 @@ const SignIn = () => {
           Sign in
         </button>
       </form>
+      <Modal
+        visible={dialogMessage !== ''}
+        width='300px'
+        footer={
+          <div className={styles.wrapDialogFooter}>
+            <Button type='primary' onClick={() => setDialogMessage('')}>
+              OK
+            </Button>
+          </div>
+        }
+      >
+        <p>{dialogMessage}</p>
+      </Modal>
     </div>
   );
 };
 
 export default SignIn;
-
-/* nếu sign in success thì truyền props cho Navbar: signin = true để thay đổi các element của navbar
-    - thêm phần: Studentlist, username, signout;  bỏ phần sign in/up.
-    */
-// get data from backend --> auth user, setSignin = true --> send to Navbar
-// get value from field --> check

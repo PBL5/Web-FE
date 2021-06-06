@@ -95,3 +95,9 @@
   background: linear-gradient(to right, #553086, #8f9bb9);
   transition: all 0.4s ease-out;
 }
+
+.wrapDialogFooter {
+  display: flex;
+  justify-content: center;
+}
+
