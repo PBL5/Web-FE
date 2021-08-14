@@ -36,6 +36,7 @@ const SearchClass = () => {
    * @event Click button show
    */
   const handleGetStudentOfClass = async () => {
+    dispatch(setIsLoading(true))
     try {
       const filterOptionPayload = { class_id, filter_options: {} };
       for (const [key, value] of Object.entries(filter_options)) {
@@ -45,18 +46,17 @@ const SearchClass = () => {
         if (value !== '') filterOptionPayload.filter_options[key] = value;
       }
 
-      console.log('filterOptionPayload', filterOptionPayload);
       const response = await apiRequest(
         STUDENT_LIST_ENTRY_POINT,
         POST,
         filterOptionPayload
       );
-      console.log(response.data)
 
       dispatch(setStudentOfClass(response.data));
     } catch (err) {
       console.log(err);
     }
+    dispatch(setIsLoading(false))
   };
 
   const handleSelectClass = ({ key }) => {

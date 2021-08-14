@@ -41,7 +41,6 @@ const StudentsTable = () => {
     const paginatedPost = _(posts).slice(startIndex).take(pagesize).value();
     setPaginatedPosts(paginatedPost);
   };
-  console.log(columns);
 
   return (
     <div className={styles.studentslist}>

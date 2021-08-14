@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './index.module.css';
 import SearchClass from './components/searchClass';
 import StudentsTable from './components/studentTable';
-import SearchFieldComp from './components/SearchFieldComp';
+import SearchField from './components/searchField';
 
 function StudentsList() {
   return (
@@ -13,7 +13,7 @@ function StudentsList() {
           <StudentsTable />
         </div>
       </div>
-      <SearchFieldComp />
+      <SearchField />
     </div>
   );
 }
