@@ -51,6 +51,7 @@ const SearchClass = () => {
         POST,
         filterOptionPayload
       );
+      console.log(response.data)
 
       dispatch(setStudentOfClass(response.data));
     } catch (err) {
@@ -61,7 +62,7 @@ const SearchClass = () => {
   const handleSelectClass = ({ key }) => {
     dispatch(
       setFilterOptions({
-        class_id: parseInt(key) + 1,
+        class_id: classes[key].class_id,
         filter_options
       })
     );
