@@ -19,6 +19,7 @@ import {
   POST,
   STUDENT_LIST_ENTRY_POINT
 } from 'src/utils/apiRequest';
+import { setIsLoading } from 'src/actions/common.action';
 
 dayjs.extend(customParseFormat);
 
@@ -47,6 +48,7 @@ const SearchField = () => {
   const dateFormat = 'DD/MM/YYYY';
 
   const handleSearchStudents = async () => {
+    dispatch(setIsLoading(true));
     try {
       let filterOptionPayload = { class_id, filter_options: {} };
       for (const [key, value] of Object.entries(filter_options)) {
@@ -64,12 +66,7 @@ const SearchField = () => {
     } catch (err) {
       console.log(err);
     }
-  };
-
-  const handleSwitch = (checked) => {
-    if (!checked) {
-      dispatch(disableDateField(checked));
-    }
+    dispatch(setIsLoading(false));
   };
 
   return (
