@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input } from 'antd';
+import { Form, Input, Select } from 'antd';
 import _ from 'lodash';
 
 const StudentHandCheck = ({ record }) => {
@@ -20,6 +20,12 @@ const StudentHandCheck = ({ record }) => {
       </Form.Item>
       <Form.Item label='Birthday'>
         <Input placeholder={record.birthday} />
+      </Form.Item>
+      <Form.Item label='Check Attending'>
+        <Select placeholder='--Hand check--'>
+          <Select.Option value='check'>Attending</Select.Option>
+          <Select.Option value='uncheck'>Absent</Select.Option>
+        </Select>
       </Form.Item>
     </Form>
   );
