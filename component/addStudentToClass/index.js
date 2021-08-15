@@ -9,7 +9,6 @@ const AddStudentToClass = () => {
     <div className={styles.root}>
       <div className={styles.wrapCmp}>
         <div className={styles.title}>ADD STUDENT TO CLASS</div>
-
         <div>
           <div>Choose class</div>
           <Select style={{ width: '100%' }}>
