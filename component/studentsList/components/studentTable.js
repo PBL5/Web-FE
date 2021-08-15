@@ -90,25 +90,6 @@ const StudentsTable = () => {
       title: 'Birthday',
       dataIndex: 'birthday',
       key: 'birthday'
-    },
-    {
-      title: ' Check hand attend',
-      dataIndex: 'attend',
-      key: 'attend',
-      render(text, record) {
-        return (
-          <Button
-            type='primary'
-            size='small'
-            onClick={() => {
-              setVisible(true);
-              setstudentData(record);
-            }}
-          >
-            Check
-          </Button>
-        );
-      }
     }
   ];
   const onSubmit = () => {
@@ -117,7 +98,18 @@ const StudentsTable = () => {
   return (
     <div className={styles.studentslist}>
       <div className={styles.table}>
-        <Table dataSource={dataSource} columns={column} />
+        <Table
+          dataSource={dataSource}
+          columns={column}
+          onRow={(record) => {
+            return {
+              onClick: (e) => {
+                setVisible(true);
+                setstudentData(record);
+              }
+            };
+          }}
+        />
       </div>
       <Modal
         title='Hand check'
