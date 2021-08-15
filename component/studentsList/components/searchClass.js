@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './searchClass.module.css';
 import { Select, Button } from 'antd';
+import AddStudentToClass from './addStudenttoClass';
 import 'antd/dist/antd.css';
 import {
   setFilterOptions,
@@ -94,6 +95,10 @@ const SearchClass = () => {
     dispatch(setIsLoading(false));
   };
 
+  const [addStudentVisible, setAddStudentVisible] = useState(false);
+  const handleOpenAddStudentModal = () => {
+    setAddStudentVisible(true);
+  };
   const { Option } = Select;
   return (
     <div className={styles.root}>
@@ -111,6 +116,9 @@ const SearchClass = () => {
         <Button style={{ marginLeft: 10 }} onClick={handleGetStudentOfClass}>
           Show
         </Button>
+        <Button style={{ marginLeft: 10 }} onClick={handleOpenAddStudentModal}>
+          Add student
+        </Button>
       </div>
       <div className={styles.wrapStartBtn}>
         <Button style={{ marginRight: 10 }} onClick={handleCallingRoll}>
@@ -118,6 +126,10 @@ const SearchClass = () => {
         </Button>
         <Button onClick={handleCheckAttendance}>Check attendances</Button>
       </div>
+      <AddStudentToClass
+        addStudentVisible={addStudentVisible}
+        setAddStudentVisible={setAddStudentVisible}
+      />
     </div>
   );
 };

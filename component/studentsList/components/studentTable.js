@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import styles from './studentsTable.module.css';
 import _ from 'lodash';
-import { Table } from 'antd';
+import { Table, Button, Modal, message } from 'antd';
+import StudentHandCheck from './StudentHandCheck';
 const pagesize = 5;
 const StudentsTable = () => {
   const { studentsOfClass } = useSelector((state) => state.studentProps);
@@ -42,80 +43,88 @@ const StudentsTable = () => {
   };
   const dataSource = [
     {
-      key: '1',
-      name: 'Mike',
-      age: 32,
-      address: '10 Downing Street'
+      user_id: 10,
+      fullname: 'Trang1',
+      email: 'trang@pbl5.net',
+      user_type: 'Student',
+      gender: 'female',
+      birthday: '2000-01-01'
     },
     {
-      key: '2',
-      name: 'John',
-      age: 42,
-      address: '10 Downing Street'
+      user_id: 10,
+      fullname: 'Trang2',
+      email: 'trang@pbl5.net',
+      user_type: 'Student',
+      gender: 'female',
+      birthday: '2000-01-01'
+    },
+    {
+      user_id: 10,
+      fullname: 'Trang3',
+      email: 'trang@pbl5.net',
+      user_type: 'Student',
+      gender: 'female',
+      birthday: '2000-01-01'
     }
   ];
+  const [visible, setVisible] = useState(false);
+  const [studentData, setstudentData] = useState(null);
 
   const column = [
     {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name'
+      title: 'Student ID',
+      dataIndex: 'user_id',
+      key: 'user_id'
     },
     {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age'
+      title: 'Full name',
+      dataIndex: 'fullname',
+      key: 'fullname'
     },
     {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address'
+      title: 'User type',
+      dataIndex: 'user_type',
+      key: 'user_type'
+    },
+    {
+      title: 'Birthday',
+      dataIndex: 'birthday',
+      key: 'birthday'
     }
   ];
+  const onSubmit = () => {
+    message.info('Checked!');
+  };
   return (
     <div className={styles.studentslist}>
-      {/* <div className={styles.table}>
-        <Table dataSource={dataSource} columns={column} />
-      </div> */}
-      <table className={styles.table}>
-        <thead>
-          <tr className={styles.tr}>
-            {paginatedPosts[0] &&
-              labelCols.map((label, index) => (
-                <th className={styles.th} key={index}>
-                  {label}
-                </th>
-              ))}
-          </tr>
-        </thead>
-        <tbody className={styles.tbody}>
-          {paginatedPosts.map((row, index) => (
-            <tr key={index}>
-              {columns.map((cols, index) => (
-                <td className={styles.td} key={index}>
-                  {cols === 'isAttending' ? row[cols] && 'OK' : row[cols]}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <nav>
-        <ul className={styles.paginationContainer}>
-          {/* <p>prev</p> */}
-          {pages.map((page, key) => (
-            <li key={key} className={styles.paginationNumber}>
-              <p
-                className={styles.paginationNumber}
-                onClick={() => pagination(page)}
-              >
-                {page}
-              </p>
-            </li>
-          ))}
-          {/* <p>pre</p> */}
-        </ul>
-      </nav>
+      <div className={styles.table}>
+        <Table
+          dataSource={dataSource}
+          columns={column}
+          onRow={(record) => {
+            return {
+              onClick: (e) => {
+                setVisible(true);
+                setstudentData(record);
+              }
+            };
+          }}
+        />
+      </div>
+      <Modal
+        title='Hand check'
+        visible={visible}
+        footer={[
+          <Button type='primary' key='submit' onClick={() => onSubmit()}>
+            Check
+          </Button>,
+          <Button key='back' onClick={() => setVisible(false)}>
+            Cancel
+          </Button>
+        ]}
+      >
+        <StudentHandCheck record={studentData} />
+      </Modal>
     </div>
   );
 };
