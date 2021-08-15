@@ -2,7 +2,6 @@ import React from 'react';
 import { DatePicker, Radio, Switch } from 'antd';
 import 'antd/dist/antd.css';
 import inputSt from './customInput.module.css';
-import clsx from 'clsx';
 import dayjs from 'dayjs';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -70,8 +69,7 @@ const SearchField = () => {
   };
 
   return (
-    <div className={inputSt.dropdownBody}>
-      <i className={clsx(inputSt.searchIcon, 'fa fa-search')}></i>
+    <div className={inputSt.container}>
       <div className={inputSt.formInputs}>
         <label htmlFor='fullname' className={inputSt.formLabel}>
           Full name

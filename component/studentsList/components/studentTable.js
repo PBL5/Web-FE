@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import styles from './studentsTable.module.css';
 import _ from 'lodash';
-import clsx from 'clsx';
-
+import { Table } from 'antd';
 const pagesize = 5;
 const StudentsTable = () => {
   const { studentsOfClass } = useSelector((state) => state.studentProps);
@@ -41,9 +40,43 @@ const StudentsTable = () => {
     const paginatedPost = _(posts).slice(startIndex).take(pagesize).value();
     setPaginatedPosts(paginatedPost);
   };
+  const dataSource = [
+    {
+      key: '1',
+      name: 'Mike',
+      age: 32,
+      address: '10 Downing Street'
+    },
+    {
+      key: '2',
+      name: 'John',
+      age: 42,
+      address: '10 Downing Street'
+    }
+  ];
 
+  const column = [
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name'
+    },
+    {
+      title: 'Age',
+      dataIndex: 'age',
+      key: 'age'
+    },
+    {
+      title: 'Address',
+      dataIndex: 'address',
+      key: 'address'
+    }
+  ];
   return (
     <div className={styles.studentslist}>
+      {/* <div className={styles.table}>
+        <Table dataSource={dataSource} columns={column} />
+      </div> */}
       <table className={styles.table}>
         <thead>
           <tr className={styles.tr}>
