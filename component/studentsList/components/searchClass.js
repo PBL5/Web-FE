@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './searchClass.module.css';
-import { Select, Button, DatePicker, Radio } from 'antd';
+import { Select, Button } from 'antd';
+import AddStudentToClass from './addStudenttoClass';
 import 'antd/dist/antd.css';
-import clsx from 'clsx';
-import style from './dropdown.module.css';
-// import inputSt from './customInput.module.css';
 import {
   setFilterOptions,
   setStudentOfClass
@@ -36,7 +34,7 @@ const SearchClass = () => {
    * @event Click button show
    */
   const handleGetStudentOfClass = async () => {
-    dispatch(setIsLoading(true))
+    dispatch(setIsLoading(true));
     try {
       const filterOptionPayload = { class_id, filter_options: {} };
       for (const [key, value] of Object.entries(filter_options)) {
@@ -56,7 +54,7 @@ const SearchClass = () => {
     } catch (err) {
       console.log(err);
     }
-    dispatch(setIsLoading(false))
+    dispatch(setIsLoading(false));
   };
 
   const handleSelectClass = ({ key }) => {
@@ -97,6 +95,10 @@ const SearchClass = () => {
     dispatch(setIsLoading(false));
   };
 
+  const [addStudentVisible, setAddStudentVisible] = useState(false);
+  const handleOpenAddStudentModal = () => {
+    setAddStudentVisible(true);
+  };
   const { Option } = Select;
   return (
     <div className={styles.root}>
@@ -114,13 +116,20 @@ const SearchClass = () => {
         <Button style={{ marginLeft: 10 }} onClick={handleGetStudentOfClass}>
           Show
         </Button>
+        <Button style={{ marginLeft: 10 }} onClick={handleOpenAddStudentModal}>
+          Add student
+        </Button>
       </div>
       <div className={styles.wrapStartBtn}>
-        <Button style={{ marginLeft: 10 }} onClick={handleCallingRoll}>
+        <Button style={{ marginRight: 10 }} onClick={handleCallingRoll}>
           Start calling the roll
         </Button>
         <Button onClick={handleCheckAttendance}>Check attendances</Button>
       </div>
+      <AddStudentToClass
+        addStudentVisible={addStudentVisible}
+        setAddStudentVisible={setAddStudentVisible}
+      />
     </div>
   );
 };

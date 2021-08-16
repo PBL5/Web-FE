@@ -6,12 +6,19 @@ import SearchField from './components/searchField';
 
 function StudentsList() {
   return (
-    <div className={styles.listContainer}>
-      <div className={styles.listContent}>
-        <div className={styles.list}>
-          <SearchClass />
-          <StudentsTable />
-        </div>
+    // <div className={styles.listContainer}>
+    //   <div className={styles.listContent}>
+    //     <div className={styles.list}>
+    //       <SearchClass />
+    //       <StudentsTable />
+    //     </div>
+    //   </div>
+    //   <SearchField />
+    // </div>
+    <div className={styles.container}>
+      <div className={styles.mainBar}>
+        <SearchClass />
+        <StudentsTable />
       </div>
       <SearchField />
     </div>

@@ -1,11 +1,22 @@
-
-.listContainer{
+.listContainer {
   background: rgb(255, 255, 255);
   height: 700px;
   background-position: center;
   background-size: cover;
   width: 100%;
   margin: 0 auto;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: auto 500px;
+  height: 100%;
+  background: white;
+  padding: 10px;
+}
+div.container > div.mainbar {
+  background: white;
+  margin: 30px;
 }
 
 .listContent {
@@ -34,5 +45,4 @@
   justify-content: flex-start;
   align-items: center;
   margin-top: 30px;
-  
 }
