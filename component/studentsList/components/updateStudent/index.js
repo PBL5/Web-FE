@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Input, Select } from 'antd';
 import _ from 'lodash';
 
-const StudentHandCheck = ({ record }) => {
+const UpdateStudentInformation = ({ record }) => {
   console.log(record);
   return (
     <Form name='handcheck' style={{ margin: 20 }} layout='vertical'>
@@ -31,4 +31,4 @@ const StudentHandCheck = ({ record }) => {
   );
 };
 
-export default StudentHandCheck;
+export default UpdateStudentInformation;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { DatePicker, Radio, Switch } from 'antd';
 import 'antd/dist/antd.css';
-import inputSt from './customInput.module.css';
+import styles from './index.module.css';
 import dayjs from 'dayjs';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -69,9 +69,9 @@ const SearchField = () => {
   };
 
   return (
-    <div className={inputSt.container}>
-      <div className={inputSt.formInputs}>
-        <label htmlFor='fullname' className={inputSt.formLabel}>
+    <div className={styles.container}>
+      <div className={styles.formInputs}>
+        <label htmlFor='fullname' className={styles.formLabel}>
           Full name
         </label>
         <input
@@ -80,12 +80,12 @@ const SearchField = () => {
           type='text'
           placeholder='Enter fullname'
           name='full_name'
-          className={inputSt.formInput}
+          className={styles.formInput}
         ></input>
       </div>
 
-      <div className={inputSt.formInputs}>
-        <label htmlFor='id' className={inputSt.formLabel}>
+      <div className={styles.formInputs}>
+        <label htmlFor='id' className={styles.formLabel}>
           Student ID
         </label>
         <input
@@ -94,12 +94,12 @@ const SearchField = () => {
           type='text'
           placeholder='Enter student ID'
           name='student_id'
-          className={inputSt.formInput}
+          className={styles.formInput}
         ></input>
       </div>
 
-      <div className={inputSt.formInputs}>
-        <label htmlFor='email' className={inputSt.formLabel}>
+      <div className={styles.formInputs}>
+        <label htmlFor='email' className={styles.formLabel}>
           Email
         </label>
         <input
@@ -108,12 +108,12 @@ const SearchField = () => {
           type='email'
           placeholder='Enter student email'
           name='email'
-          className={inputSt.formInput}
+          className={styles.formInput}
         ></input>
       </div>
 
       <div>
-        <label htmlFor='gender' className={inputSt.formLabel}>
+        <label htmlFor='gender' className={styles.formLabel}>
           Gender
           <Switch
             checked={!disableGenderField}
@@ -140,7 +140,7 @@ const SearchField = () => {
       </div>
 
       <div>
-        <label className={inputSt.formLabel}>
+        <label className={styles.formLabel}>
           Date of birth
           <Switch
             checked={!disableDateField}
@@ -167,10 +167,10 @@ const SearchField = () => {
         />
       </div>
       <div>
-        <button className={inputSt.clearBtn} onClick={handleClear}>
+        <button className={styles.clearBtn} onClick={handleClear}>
           Clear
         </button>
-        <button className={inputSt.formInputBtn} onClick={handleSearchStudents}>
+        <button className={styles.formInputBtn} onClick={handleSearchStudents}>
           Search
         </button>
       </div>

@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import styles from './studentsTable.module.css';
 import _ from 'lodash';
 import { Table, Button, Modal, message } from 'antd';
-import StudentHandCheck from './StudentHandCheck';
-const pagesize = 5;
+
+import styles from './index.module.css';
+import UpdateStudentInformation from '../updateStudent/index';
+
+const PAGE_SIZE = 5;
+
 const StudentsTable = () => {
   const { studentsOfClass } = useSelector((state) => state.studentProps);
 
   const [posts, setPosts] = useState();
-  const pagi = _(studentsOfClass).slice(0).take(pagesize).value();
+  const pagi = _(studentsOfClass).slice(0).take(PAGE_SIZE).value();
   const [paginatedPosts, setPaginatedPosts] = useState(pagi);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    setPaginatedPosts(_(studentsOfClass).slice(0).take(pagesize).value());
+    setPaginatedPosts(_(studentsOfClass).slice(0).take(PAGE_SIZE).value());
     setPosts(studentsOfClass);
   }, [studentsOfClass]);
 
@@ -30,17 +33,18 @@ const StudentsTable = () => {
     'Is attendant'
   ];
 
-  const pageCount = posts ? Math.ceil(posts.length / pagesize) : 0;
+  const pageCount = posts ? Math.ceil(posts.length / PAGE_SIZE) : 0;
 
   //if (pageCount === 1) return null;
   const pages = _.range(1, pageCount + 1);
 
   const pagination = (pageNo) => {
     setCurrentPage(pageNo);
-    const startIndex = (pageNo - 1) * pagesize;
-    const paginatedPost = _(posts).slice(startIndex).take(pagesize).value();
+    const startIndex = (pageNo - 1) * PAGE_SIZE;
+    const paginatedPost = _(posts).slice(startIndex).take(PAGE_SIZE).value();
     setPaginatedPosts(paginatedPost);
   };
+
   const dataSource = [
     {
       user_id: 10,
@@ -92,9 +96,11 @@ const StudentsTable = () => {
       key: 'birthday'
     }
   ];
+
   const onSubmit = () => {
     message.info('Checked!');
   };
+
   return (
     <div className={styles.studentslist}>
       <div className={styles.table}>
@@ -103,7 +109,7 @@ const StudentsTable = () => {
           columns={column}
           onRow={(record) => {
             return {
-              onClick: (e) => {
+              onClick: () => {
                 setVisible(true);
                 setstudentData(record);
               }
@@ -123,7 +129,7 @@ const StudentsTable = () => {
           </Button>
         ]}
       >
-        <StudentHandCheck record={studentData} />
+        <UpdateStudentInformation record={studentData} />
       </Modal>
     </div>
   );

@@ -9,7 +9,6 @@
     width: 100%;
     padding: 70px 20px;
     box-sizing: border-box;
-
 }
 .cardWrapper:hover, .cardWrapper:focus, .cardWrapper:active{
     outline: none;

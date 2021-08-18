@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styles from './searchClass.module.css';
+import styles from './index.module.css';
 import { Select, Button } from 'antd';
-import AddStudentToClass from './addStudenttoClass';
 import 'antd/dist/antd.css';
 import {
   setFilterOptions,
@@ -17,6 +16,7 @@ import {
   STUDENT_LIST_ENTRY_POINT
 } from 'src/utils/apiRequest';
 import { setIsLoading } from 'src/actions/common.action';
+import AddStudentToClass from '../addStudentToClass/index';
 
 const SearchClass = () => {
   const {
@@ -30,8 +30,6 @@ const SearchClass = () => {
 
   /*
    * Get students base on filter options and save to store
-   *
-   * @event Click button show
    */
   const handleGetStudentOfClass = async () => {
     dispatch(setIsLoading(true));

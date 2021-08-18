@@ -1,20 +1,11 @@
 import React from 'react';
+import SearchClass from './components/searchClass/index';
+import SearchField from './components/searchField/index';
+import StudentsTable from './components/studentTable/index';
 import styles from './index.module.css';
-import SearchClass from './components/searchClass';
-import StudentsTable from './components/studentTable';
-import SearchField from './components/searchField';
 
 function StudentsList() {
   return (
-    // <div className={styles.listContainer}>
-    //   <div className={styles.listContent}>
-    //     <div className={styles.list}>
-    //       <SearchClass />
-    //       <StudentsTable />
-    //     </div>
-    //   </div>
-    //   <SearchField />
-    // </div>
     <div className={styles.container}>
       <div className={styles.mainBar}>
         <SearchClass />
