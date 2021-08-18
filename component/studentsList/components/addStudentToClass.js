@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Input, Modal, Button, DatePicker, Radio, message } from 'antd';
+import moment from 'moment';
 
 const AddStudentToClass = (props) => {
   const [studentData, setStudentData] = useState({
@@ -8,14 +9,36 @@ const AddStudentToClass = (props) => {
     birthday: '',
     gender: ''
   });
-  const onSaveAddStudent = (values) => {
+  const onSaveAddStudent = () => {
     message.info('Added');
-    console.log(values);
+    console.log(studentData);
+  };
+  const handleInputChange = (e) => {
+    setStudentData({
+      ...studentData,
+      [e.target.name]: e.target.value
+    });
   };
 
   return (
-    <Modal title='Add Student to class' visible={props.addStudentVisible}>
-      <Form name='addstudent' onSubmit={() => onSaveAddStudent()}>
+    <Modal
+      title='Add Student to class'
+      visible={props.addStudentVisible}
+      footer={[
+        <Button key='back' onClick={() => props.setAddStudentVisible(false)}>
+          Cancel
+        </Button>,
+        <Button
+          key='submit'
+          type='primary'
+          htmlType='submit'
+          onClick={onSaveAddStudent}
+        >
+          Save
+        </Button>
+      ]}
+    >
+      <Form name='addstudent'>
         <Form.Item
           name='studentID'
           label='Student ID'
@@ -26,7 +49,11 @@ const AddStudentToClass = (props) => {
             }
           ]}
         >
-          <Input />
+          <Input
+            name='studentID'
+            value={studentData.studentID}
+            onChange={handleInputChange}
+          />
         </Form.Item>
         <Form.Item
           name='fullname'
@@ -38,11 +65,16 @@ const AddStudentToClass = (props) => {
             }
           ]}
         >
-          <Input />
+          <Input
+            name='fullname'
+            value={studentData.fullname}
+            onChange={handleInputChange}
+          />
         </Form.Item>
         <Form.Item
           name='birthday'
           label='Birthday'
+          style={{ width: '100%' }}
           rules={[
             {
               required: true,
@@ -50,7 +82,17 @@ const AddStudentToClass = (props) => {
             }
           ]}
         >
-          <DatePicker />
+          <DatePicker
+            value={moment(studentData.birthday, 'YYYY-MM-DD')}
+            onChange={(date, text) =>
+              handleInputChange({
+                target: {
+                  name: 'birthday',
+                  value: moment(date).format('YYYY-MM-DD')
+                }
+              })
+            }
+          />
         </Form.Item>
         <Form.Item
           name='gender'
@@ -62,7 +104,11 @@ const AddStudentToClass = (props) => {
             }
           ]}
         >
-          <Radio.Group>
+          <Radio.Group
+            name='gender'
+            value={studentData.gender}
+            onChange={handleInputChange}
+          >
             <Radio value='male' key={1}>
               Male
             </Radio>
@@ -71,14 +117,6 @@ const AddStudentToClass = (props) => {
             </Radio>
           </Radio.Group>
         </Form.Item>
-        <div style={{ alignContent: 'right' }}>
-          <Button onClick={() => props.setAddStudentVisible(false)}>
-            Cancel
-          </Button>
-          <Button type='primary' htmlType='submit'>
-            Save
-          </Button>
-        </div>
       </Form>
     </Modal>
   );
