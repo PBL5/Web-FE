@@ -21,11 +21,11 @@ const AddStudentToClass = (props) => {
       ...studentData,
       class_id
     };
-//     await apiRequest(
-      // ADD_STUDENT_TO_CLASS_ENTRY_POINT,
-      // POST,
-      // addStudentToClassPayload
-    // );
+    await apiRequest(
+      ADD_STUDENT_TO_CLASS_ENTRY_POINT,
+      POST,
+      addStudentToClassPayload
+    );
   };
 
   const handleInputChange = (e) => {

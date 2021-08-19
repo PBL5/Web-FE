@@ -17,6 +17,7 @@ import {
 } from 'src/utils/apiRequest';
 import { setIsLoading } from 'src/actions/common.action';
 import AddStudentToClass from '../addStudentToClass/index';
+import { getStudentList } from 'src/utils/studentList';
 
 const SearchClass = () => {
   const [addStudentVisible, setAddStudentVisible] = useState(false);
@@ -26,32 +27,8 @@ const SearchClass = () => {
     filterOptions: { class_id, filter_options },
     disableDateField,
     disableGenderField,
-    studentsOfClass
   } = useSelector((state) => state.studentProps);
   const dispatch = useDispatch();
-
-  const checkStudentAttendance = async (studentList) => {
-    // Get attendace status of student
-    const response = await apiRequest(
-      CHECK_ATTENDANCE_ENTRY_POINT,
-      GET,
-      {},
-      { class_id }
-    );
-    const studentAttendances = response.data;
-    console.log(studentAttendances)
-
-    const newStudentOfClass = studentList.map((element) => {
-      const result = studentAttendances.find(
-        (e) => e.user_id === element.user_id
-      );
-      if (result) return { ...result, attendanceStatus: true };
-      return { ...element, attendanceStatus: false };
-    });
-    console.log('newStudentOfClass',newStudentOfClass);
-
-    return newStudentOfClass;
-  };
 
   /*
    * Get students base on filter options and save to store
@@ -67,15 +44,9 @@ const SearchClass = () => {
         if (value !== '') filterOptionPayload.filter_options[key] = value;
       }
 
-      let response = await apiRequest(
-        STUDENT_LIST_ENTRY_POINT,
-        POST,
-        filterOptionPayload
-      );
+      const studentList = await getStudentList(filterOptionPayload);
 
-      const newStudentOfClass = await checkStudentAttendance(response.data);
-
-      dispatch(setStudentOfClass(newStudentOfClass));
+      dispatch(setStudentOfClass(studentList));
     } catch (err) {
       console.log(err);
     }
@@ -95,8 +66,9 @@ const SearchClass = () => {
     dispatch(setIsLoading(true));
 
     await apiRequest(CALL_ROLL_ENTRY_POINT, GET, {}, { class_id });
-    const newStudentOfClass = await checkStudentAttendance(studentsOfClass);
-    dispatch(setStudentOfClass(newStudentOfClass));
+
+    const studentList = await getStudentList({ class_id });
+    dispatch(setStudentOfClass(studentList));
 
     dispatch(setIsLoading(false));
   };

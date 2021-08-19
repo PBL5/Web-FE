@@ -41,13 +41,11 @@ const StudentsTable = () => {
   const onSubmit = () => {
     message.info('Checked!');
   };
-  console.log('studentsOfClass', studentsOfClass)
 
   const formattedStudentList = studentsOfClass.map((student) => ({
     ...student,
     attendingStatus: student.attendanceStatus ? 'Yes' : 'No'
   }));
-  console.log('formattedStudentList', formattedStudentList)
 
   return (
     <div className={styles.studentslist}>
