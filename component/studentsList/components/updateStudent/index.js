@@ -1,30 +1,41 @@
 import React from 'react';
 import { Form, Input, Select } from 'antd';
-import _ from 'lodash';
 
-const UpdateStudentInformation = ({ record }) => {
-  console.log(record);
+const UpdateStudentInformation = ({ studentInfo }) => {
+  const fields = [
+    {
+      label: 'Student ID',
+      key: 'user_id'
+    },
+    {
+      label: 'Full name',
+      key: 'full_name'
+    },
+    {
+      label: 'Email',
+      key: 'email'
+    },
+    {
+      label: 'Gender',
+      key: 'gender'
+    },
+    {
+      label: 'Birthday',
+      key: 'birthday'
+    }
+  ];
+
   return (
     <Form name='handcheck' style={{ margin: 20 }} layout='vertical'>
-      <Form.Item label='Student ID'>
-        <Input placeholder={record.user_id} />
-      </Form.Item>
-      <Form.Item label='Full name'>
-        <Input placeholder={record.fullname} />
-      </Form.Item>
-      <Form.Item label='Email'>
-        <Input placeholder={record.email} />
-      </Form.Item>
-      <Form.Item label='Gender'>
-        <Input placeholder={record.gender} />
-      </Form.Item>
-      <Form.Item label='Birthday'>
-        <Input placeholder={record.birthday} />
-      </Form.Item>
+      {fields.map((field, key) => (
+        <Form.Item key={key} label={field.label}>
+          <Input disabled value={studentInfo[field.key]} />
+        </Form.Item>
+      ))}
       <Form.Item label='Check Attending'>
         <Select placeholder='--Hand check--'>
-          <Select.Option value='check'>Attending</Select.Option>
-          <Select.Option value='uncheck'>Absent</Select.Option>
+          <Select.Option value={1}>Attending</Select.Option>
+          <Select.Option value={0}>Absent</Select.Option>
         </Select>
       </Form.Item>
     </Form>

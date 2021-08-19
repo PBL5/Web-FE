@@ -1,78 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import _ from 'lodash';
 import { Table, Button, Modal, message } from 'antd';
 
 import styles from './index.module.css';
 import UpdateStudentInformation from '../updateStudent/index';
 
-const PAGE_SIZE = 5;
-
 const StudentsTable = () => {
   const { studentsOfClass } = useSelector((state) => state.studentProps);
-
-  const [posts, setPosts] = useState();
-  const pagi = _(studentsOfClass).slice(0).take(PAGE_SIZE).value();
-  const [paginatedPosts, setPaginatedPosts] = useState(pagi);
-  const [currentPage, setCurrentPage] = useState(1);
-
-  useEffect(() => {
-    setPaginatedPosts(_(studentsOfClass).slice(0).take(PAGE_SIZE).value());
-    setPosts(studentsOfClass);
-  }, [studentsOfClass]);
-
-  const columns = paginatedPosts[0] && Object.keys(paginatedPosts[0]);
-
-  const labelCols = [
-    'Student ID',
-    'Full name',
-    'Email',
-    'Role',
-    'Gender',
-    'Date of birth',
-    'Is attendant'
-  ];
-
-  const pageCount = posts ? Math.ceil(posts.length / PAGE_SIZE) : 0;
-
-  //if (pageCount === 1) return null;
-  const pages = _.range(1, pageCount + 1);
-
-  const pagination = (pageNo) => {
-    setCurrentPage(pageNo);
-    const startIndex = (pageNo - 1) * PAGE_SIZE;
-    const paginatedPost = _(posts).slice(startIndex).take(PAGE_SIZE).value();
-    setPaginatedPosts(paginatedPost);
-  };
-
-  const dataSource = [
-    {
-      user_id: 10,
-      fullname: 'Trang1',
-      email: 'trang@pbl5.net',
-      user_type: 'Student',
-      gender: 'female',
-      birthday: '2000-01-01'
-    },
-    {
-      user_id: 10,
-      fullname: 'Trang2',
-      email: 'trang@pbl5.net',
-      user_type: 'Student',
-      gender: 'female',
-      birthday: '2000-01-01'
-    },
-    {
-      user_id: 10,
-      fullname: 'Trang3',
-      email: 'trang@pbl5.net',
-      user_type: 'Student',
-      gender: 'female',
-      birthday: '2000-01-01'
-    }
-  ];
   const [visible, setVisible] = useState(false);
-  const [studentData, setstudentData] = useState(null);
+  const [selectedInfo, setSeletecStudentInfo] = useState(null);
 
   const column = [
     {
@@ -82,8 +18,8 @@ const StudentsTable = () => {
     },
     {
       title: 'Full name',
-      dataIndex: 'fullname',
-      key: 'fullname'
+      dataIndex: 'full_name',
+      key: 'full_name'
     },
     {
       title: 'User type',
@@ -94,42 +30,54 @@ const StudentsTable = () => {
       title: 'Birthday',
       dataIndex: 'birthday',
       key: 'birthday'
+    },
+    {
+      title: 'Is attending?',
+      dataIndex: 'attendingStatus',
+      key: 'attendingStatus'
     }
   ];
 
   const onSubmit = () => {
     message.info('Checked!');
   };
+  console.log('studentsOfClass', studentsOfClass)
+
+  const formattedStudentList = studentsOfClass.map((student) => ({
+    ...student,
+    attendingStatus: student.attendanceStatus ? 'Yes' : 'No'
+  }));
+  console.log('formattedStudentList', formattedStudentList)
 
   return (
     <div className={styles.studentslist}>
       <div className={styles.table}>
         <Table
-          dataSource={dataSource}
+          dataSource={formattedStudentList}
           columns={column}
-          onRow={(record) => {
+          onRow={(studentInfo) => {
             return {
               onClick: () => {
                 setVisible(true);
-                setstudentData(record);
+                setSeletecStudentInfo(studentInfo);
               }
             };
           }}
         />
       </div>
       <Modal
-        title='Hand check'
+        title="Update student's information"
         visible={visible}
         footer={[
           <Button type='primary' key='submit' onClick={() => onSubmit()}>
-            Check
+            Update
           </Button>,
           <Button key='back' onClick={() => setVisible(false)}>
             Cancel
           </Button>
         ]}
       >
-        <UpdateStudentInformation record={studentData} />
+        <UpdateStudentInformation studentInfo={selectedInfo} />
       </Modal>
     </div>
   );

@@ -1,18 +1,33 @@
 import React, { useState } from 'react';
-import { Form, Input, Modal, Button, DatePicker, Radio, message } from 'antd';
-import moment from 'moment';
+import { Form, Input, Modal, Button, message } from 'antd';
+import {
+  ADD_STUDENT_TO_CLASS_ENTRY_POINT,
+  apiRequest,
+  POST
+} from 'src/utils/apiRequest';
+import { useSelector } from 'react-redux';
 
 const AddStudentToClass = (props) => {
+  const {
+    filterOptions: { class_id }
+  } = useSelector((state) => state.studentProps);
+
   const [studentData, setStudentData] = useState({
-    studentID: '',
-    fullname: '',
-    birthday: '',
-    gender: ''
+    student_id: ''
   });
-  const onSaveAddStudent = () => {
-    message.info('Added');
-    console.log(studentData);
+
+  const onSaveAddStudent = async () => {
+    const addStudentToClassPayload = {
+      ...studentData,
+      class_id
+    };
+//     await apiRequest(
+      // ADD_STUDENT_TO_CLASS_ENTRY_POINT,
+      // POST,
+      // addStudentToClassPayload
+    // );
   };
+
   const handleInputChange = (e) => {
     setStudentData({
       ...studentData,
@@ -40,7 +55,7 @@ const AddStudentToClass = (props) => {
     >
       <Form name='addstudent'>
         <Form.Item
-          name='studentID'
+          name='student_id'
           label='Student ID'
           rules={[
             {
@@ -55,8 +70,8 @@ const AddStudentToClass = (props) => {
             onChange={handleInputChange}
           />
         </Form.Item>
-        <Form.Item
-          name='fullname'
+        {/*<Form.Item
+          name='full_name'
           label='Full name'
           rules={[
             {
@@ -116,7 +131,7 @@ const AddStudentToClass = (props) => {
               Female
             </Radio>
           </Radio.Group>
-        </Form.Item>
+        </Form.Item>*/}
       </Form>
     </Modal>
   );
