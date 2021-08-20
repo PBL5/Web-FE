@@ -5,27 +5,38 @@ import {
   apiRequest,
   POST
 } from 'src/utils/apiRequest';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsLoading } from 'src/actions/common.action';
+import { getStudentList } from 'src/utils/studentList';
+import { setStudentOfClass } from 'src/actions/students.action';
 
 const AddStudentToClass = (props) => {
   const {
     filterOptions: { class_id }
   } = useSelector((state) => state.studentProps);
+  const dispatch = useDispatch();
 
   const [studentData, setStudentData] = useState({
     student_id: ''
   });
 
   const onSaveAddStudent = async () => {
+    dispatch(setIsLoading(true));
     const addStudentToClassPayload = {
       ...studentData,
       class_id
     };
+    console.log(addStudentToClassPayload)
     await apiRequest(
       ADD_STUDENT_TO_CLASS_ENTRY_POINT,
       POST,
       addStudentToClassPayload
     );
+
+    const studentList = await getStudentList({ class_id });
+    dispatch(setStudentOfClass(studentList));
+
+    dispatch(setIsLoading(false));
   };
 
   const handleInputChange = (e) => {
@@ -65,8 +76,8 @@ const AddStudentToClass = (props) => {
           ]}
         >
           <Input
-            name='studentID'
-            value={studentData.studentID}
+            name='student_id'
+            value={studentData.student_id}
             onChange={handleInputChange}
           />
         </Form.Item>

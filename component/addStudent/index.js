@@ -57,11 +57,11 @@ const AddStudents = () => {
 
     dispatch(setIsLoading(true));
     try {
-      await apiRequest(ADD_STUDENT_ENTRY_POINT, POST, studentInfo);
+      const response = await apiRequest(ADD_STUDENT_ENTRY_POINT, POST, studentInfo);
       dispatch(setIsLoading(false));
       setDialogData({
         openDialog: true,
-        dialogContent: 'Add student successfully'
+        dialogContent: `Add student successfully. Student ID is: ${response.data}`
       });
     } catch (err) {
       console.log(err);
